@@ -180,6 +180,13 @@ ADD CONSTRAINT fk_partido FOREIGN KEY (id_partido) REFERENCES partido_politico(i
     ON DELETE CASCADE; -- Los requerimientos no especifican que se necesite guardar el dato
                         -- de los ciudadanos que alguna vez fueron parte de un partido.
 
+ALTER TABLE integrante_partido
+DROP PRIMARY KEY, 
+ADD CONSTRAINT PRIMARY KEY (ci, id_partido);
+
+ALTER TABLE integrante_partido
+UNIQUE (ci);
+
 -- Presidente y vicepresidente de partido político.
 CREATE TABLE preside_vicepreside_partido (
     id_rol tinyint,
@@ -214,12 +221,13 @@ ADD CONSTRAINT fk_partido_papeleta FOREIGN KEY (id_partido_politico)
     ON DELETE CASCADE;
 
 CREATE TABLE integrante_en_papeleta_lista (
-    id_integrante varchar(20) , -- un integrante puede estar en distintas listas
+    id_integrante varchar(20), -- un integrante puede estar en distintas listas
+    id_partido_politico int,
     id_papeleta_lista int,
     orden int,
     id_rol int,
     PRIMARY KEY (id_papeleta_lista, id_integrante, orden),
-    FOREIGN KEY (id_integrante) REFERENCES integrante_partido(ci)
+    FOREIGN KEY (id_integrante, id_partido_politico) REFERENCES integrante_partido(ci, id_partido)
         ON DELETE CASCADE,
     FOREIGN KEY (id_papeleta_lista) REFERENCES papeleta_lista(id)
         ON DELETE CASCADE,
