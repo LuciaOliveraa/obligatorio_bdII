@@ -185,7 +185,7 @@ DROP PRIMARY KEY,
 ADD CONSTRAINT PRIMARY KEY (ci, id_partido);
 
 ALTER TABLE integrante_partido
-UNIQUE (ci);
+ADD CONSTRAINT unique_ci UNIQUE (ci);
 
 -- Presidente y vicepresidente de partido político.
 CREATE TABLE preside_vicepreside_partido (

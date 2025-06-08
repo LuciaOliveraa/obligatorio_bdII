@@ -1,8 +1,9 @@
 
-use elecciones;
+-- use elecciones;
 
 -- ROLES
--- Este script solo funciona si estas conectado al servidor de la ucu.
+-- Este script solo funciona si estas conectado al servidor de la ucu. Mentira!! En ese servidor no tenemos permitido crear roles o usuarios.
+
 
 CREATE ROLE IF NOT EXISTS 'administrador_rol';
 CREATE ROLE IF NOT EXISTS 'encargado_circuito_rol';
