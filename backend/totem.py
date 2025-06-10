@@ -11,9 +11,9 @@ def totemRoutes(app):
         try:
             cursor = db.cursor(dictionary=True)
             cursor.execute("SELECT * FROM partido_politico")
-            partidos = cursor.fetchall()
+            result = cursor.fetchall()
 
-            return jsonify(partidos), 200
+            return jsonify(result), 200
         except Error as e:
             return jsonify({"Error: ": str(e)}), 500
         finally:
@@ -25,9 +25,23 @@ def totemRoutes(app):
         try:
             cursor = db.cursor(dictionary=True)
             cursor.execute("SELECT * FROM tipo_voto")
-            partidos = cursor.fetchall()
+            result = cursor.fetchall()
 
-            return jsonify(partidos), 200
+            return jsonify(result), 200
+        except Error as e:
+            return jsonify({"Error: ": str(e)}), 500
+        finally:
+            cursor.close()
+
+
+    @app.route("/lista/<int:id>", methods = ['GET'])
+    def get_lista(id):
+        try:
+            cursor = db.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM papeleta_lista WHERE id_partido_politico=%s", (id, ))
+            result = cursor.fetchall()
+
+            return jsonify(result), 200
         except Error as e:
             return jsonify({"Error: ": str(e)}), 500
         finally:
