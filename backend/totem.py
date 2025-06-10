@@ -18,3 +18,17 @@ def totemRoutes(app):
             return jsonify({"Error: ": str(e)}), 500
         finally:
             cursor.close()
+
+
+    @app.route("/tipo-voto", methods = ['GET'])
+    def get_tipo_voto():
+        try:
+            cursor = db.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM tipo_voto")
+            partidos = cursor.fetchall()
+
+            return jsonify(partidos), 200
+        except Error as e:
+            return jsonify({"Error: ": str(e)}), 500
+        finally:
+            cursor.close()
