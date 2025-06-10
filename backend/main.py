@@ -1,5 +1,6 @@
 from flask import Flask
 from connection import get_db_connection
+from totem import totemRoutes
 
 app = Flask(__name__)
 
@@ -17,6 +18,8 @@ def status_db():
         status = "Desconectado de la base de datos."
     
     return status
+
+totemRoutes(app)
 
 if __name__ == "__main__":
     app.run()
