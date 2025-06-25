@@ -1,0 +1,76 @@
+.confirmar-container {
+  background-color: #E8F2FF;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+}
+
+.flecha-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #07458B;
+}
+
+.popup {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  text-align: center;
+}
+
+.popup h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20%;
+}
+
+.cancelar-button {
+  background: white;
+  border: 2px solid #e53935;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  margin-right: 20px;
+}
+
+.cancelar-button:hover {
+  background: #ed8d8d;
+}
+
+.aceptar-button {
+  background: #07458B;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  margin-left: 20px;
+}
+
+.aceptar-button:hover {
+  background: #063a72;
+}

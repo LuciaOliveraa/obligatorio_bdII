@@ -1,0 +1,52 @@
+.welcome-container {
+  background-color: #E8F2FF;
+  color: #07458B;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 20px;
+}
+
+.logo {
+  width: 50%;
+  height: auto;
+  margin-bottom: 20px;
+}
+body{
+  background-color: #E8F2FF;
+}
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.start-button {
+  background-color: #07458B;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.touch-icon{
+  width: 24px;
+  height: 24px;
+}
+
+.start-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}

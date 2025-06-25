@@ -1,0 +1,78 @@
+.lista-container {
+  padding: 40px 20px;
+  height: 100vh;
+  background-color: #E8F2FF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.flecha-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #07458B;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 30px;
+  color: #07458B;
+}
+
+.botones-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.lista-button {
+  width: 220px;
+  padding: 16px;
+  font-size: 18px;
+  background-color: #eee;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.lista-button.selected {
+  background-color: #07458B;
+  color: white;
+  border-color: #07458B;
+}
+
+.acciones {
+  display: flex;
+  gap: 20px;
+}
+
+.cancelar-button,
+.confirmar-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelar-button {
+  background-color: #999;
+  color: white;
+}
+
+.confirmar-button {
+  background-color: #07458B;
+  color: white;
+}
+
+.confirmar-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}

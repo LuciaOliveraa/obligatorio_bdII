@@ -1,0 +1,25 @@
+/* ConfirmAction.css (compartido para Anulado y Blanco) */
+.confirm-action-container {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.confirm-box {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+}
+
+.confirm-buttons {
+  gap: 15px;
+}
+
+/* Anulado específico */
+.anulado-box {
+  border-top: 5px solid #e53935;
+}
+
+/* Blanco específico */
+.blanco-box {
+  border-top: 5px solid #2196f3;
+}
