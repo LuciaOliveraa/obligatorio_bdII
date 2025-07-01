@@ -44,3 +44,4 @@ DELIMITER ;
 
 
 
+-- agregar trigger para ci?
