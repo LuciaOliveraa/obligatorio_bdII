@@ -2,21 +2,21 @@ import mysql.connector
 from mysql.connector import Error
 
 # Configuración de la conexión a la base de datos
-config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'rootpass',
-    'database': 'elecciones',
-}
+# config = {
+#     'host': 'localhost',
+#     'user': 'root',
+#     'password': 'rootpass',
+#     'database': 'elecciones',
+# }
 
 # Configuración de la conexión a la base de datos de la UCU
-# config = {
-#     'host': 'mysql.reto-ucu.net',
-#     'port': 50006,
-#     'user': 'ic_g4_admin',
-#     'password': 'Bd2025!',
-#     'database': 'IC_Grupo4',
-# }
+config = {
+    'host': 'mysql.reto-ucu.net',
+    'port': 50006,
+    'user': 'ic_g4_admin',
+    'password': 'Bd2025!',
+    'database': 'IC_Grupo4',
+}
 
 # Conectar a la base de datos y devolver la conexión
 def get_db_connection():
