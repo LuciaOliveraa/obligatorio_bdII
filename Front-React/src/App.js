@@ -17,6 +17,7 @@ const VoteConfirmed = React.lazy(() => import('./Views/VoteConfirmed/VoteConfirm
 const LoginMesa = React.lazy(() => import('./Views/LoginMesa/LoginMesa'));
 const BusquedaMesa = React.lazy(() => import('./Views/BusquedaMesa/BusquedaMesa'));
 const ConfirmacionVotante = React.lazy(() => import('./Views/ConfirmacionVotante/ConfirmacionVotante'));
+const VotanteHabilitado = React.lazy(() => import('./Views/VotanteHabilitado/VotanteHabilitado'));
 const Estadisticas = React.lazy(() => import('./Views/Estadisticas/Estadisticas'));
 
 
@@ -41,6 +42,7 @@ function App() {
               <Route path={ROUTES.LOGINMESA} element={<LoginMesa />} />
               <Route path={ROUTES.BUSQUEDAMESA} element={<BusquedaMesa />} />
               <Route path={ROUTES.CONFIRMACIONVOTANTE} element={<ConfirmacionVotante />} />
+              <Route path={ROUTES.VOTANTEHABILITADO} element={<VotanteHabilitado />} />
               <Route path={ROUTES.ESTADISTICAS} element={<Estadisticas />} />
               <Route path="*" element={<div>Página no encontrada</div>} />
             </Routes>

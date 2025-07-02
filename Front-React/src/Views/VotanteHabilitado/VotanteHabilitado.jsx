@@ -1,13 +1,14 @@
-import React  from 'react';
+import React from 'react';
 import '../../Styles/VotanteHabilitado.css';
 
 function VotanteHabilitado() {
-   return (
-       <div>
-           <h1>Usuario habilitado para votar</h1>
-           <button onClick={() => {/* Lógica para volver */}}>Volver</button>
-       </div>
-   );
+  return (
+    <div className="votante-container">
+      <img src="/logo.png" alt="Escudo de Uruguay" />
+      <h1>Usuario habilitado para votar</h1>
+      <button onClick={() => window.history.back()}>Volver</button>
+    </div>
+  );
 }
 
 export default VotanteHabilitado;

@@ -13,6 +13,7 @@ export const ROUTES = {
   LOGINMESA: '/loginmesa',
   BUSQUEDAMESA: '/busqueda-mesa',
   CONFIRMACIONVOTANTE: '/confirmacionvotante',
+  VOTANTEHABILITADO: '/votantehabilitado',
   ESTADISTICAS: '/estadisticas'
 
 };
