@@ -8,7 +8,7 @@ PAPELETA = 1
 
 db = get_db_connection()
 
-def votacionTotemRoutes(app):
+def votacionRoutes(app):
 
     def postPapeletaVoto(cursor, id_voto, id_papeleta):
         cursor.execute("""INSERT INTO papeleta_en_voto (id_voto, id_papeleta)
@@ -47,7 +47,20 @@ def votacionTotemRoutes(app):
             cursor.close()
 
 
-"""
-    endpoints:
-        - voto credencial (poner que la credencial ya voto)  PUT
-"""
+    @app.route("/voto-credencial/<string:serie>/<int:num>", methods=['PUT'])
+    def put_voto_credencial(serie, num):
+        try:
+            cursor = db.cursor(dictionary=True)
+
+            voto = request.args.get('voto')
+
+            cursor.execute("""UPDATE credencial_asignada_circuito_instancia_electiva
+                            SET voto_realizado = %s
+                            WHERE serie_credencial = %s AND numero_credencial = %s""", 
+                            (voto, serie, num,))
+
+            return jsonify({"message": f"Voto {voto} de credencial correctamente registrado"}), 201
+        except Error as e:
+            return jsonify({"Error: ": str(e)}), 500
+        finally:
+            cursor.close()
