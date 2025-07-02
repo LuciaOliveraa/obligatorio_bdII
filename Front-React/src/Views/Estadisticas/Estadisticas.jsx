@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../Styles/Estadisticas.css';
 
 function Estadisticas() {
    return (

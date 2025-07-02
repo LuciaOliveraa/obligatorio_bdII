@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Switch } from 'antd'; // Asegúrate de tener Ant Design instalado
+import { Switch } from 'antd'; 
+import '../../Styles/BusquedaMesa.css';
 
 function BusquedaMesa() {
    const [users, setUsers] = useState([]);

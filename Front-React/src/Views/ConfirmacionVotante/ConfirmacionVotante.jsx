@@ -1,4 +1,5 @@
 import React from "react";
+import '../../Styles/ConfirmacionVotante.css';
 
 function ConfirmationPopup({ user, onConfirm, onCancel }) {
    return (

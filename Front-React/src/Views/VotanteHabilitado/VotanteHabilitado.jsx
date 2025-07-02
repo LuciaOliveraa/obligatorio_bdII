@@ -1,4 +1,5 @@
 import React  from 'react';
+import '../../Styles/VotanteHabilitado.css';
 
 function VotanteHabilitado() {
    return (

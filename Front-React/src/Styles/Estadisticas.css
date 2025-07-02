@@ -1,0 +1,18 @@
+/* Estadisticas.css */
+.estadisticas {
+  background-color: #D9D9D9;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.header {
+  background-color: #E8F2FF;
+  padding: 10px;
+  text-align: center;
+}
+
+.title {
+  color: #07458B;
+  font-size: 24px;
+  font-weight: bold;
+}
