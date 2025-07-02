@@ -14,7 +14,7 @@ config = {
     'host': 'mysql.reto-ucu.net',
     'port': 50006,
     'user': 'ic_g4_admin',
-    'password': 'Bd2025!',
+    'password': '',
     'database': 'IC_Grupo4',
 }
 
