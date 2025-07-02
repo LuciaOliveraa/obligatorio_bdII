@@ -8,5 +8,11 @@ export const ROUTES = {
   BLANCO: '/blanco',
   ANULADO: '/anulado',
   CONFIRM_LISTA: '/lista',
-  CONFIRMED: '/vote-confirmed'
+  CONFIRMED: '/vote-confirmed',
+
+  LOGINMESA: '/loginmesa',
+  BUSQUEDA_MESA: '/buscar',
+  CONFIRMACION_VOTANTE: '/confirmacion',
+  ESTADISTICAS: '/estadisticas'
+
 };
