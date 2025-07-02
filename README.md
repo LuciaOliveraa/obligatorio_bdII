@@ -19,3 +19,4 @@ Para ejecutar el backend, es necesario contar con:
   * Python
   * Flask: <code>pip install Flask</code>
   * MySQL Conector: <code>pip install mysql-connector-python</code>
+  * Flask Cors: <code>pip install flask-cors</code>

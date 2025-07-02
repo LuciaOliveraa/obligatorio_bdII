@@ -9,10 +9,10 @@ config = {
     'database': 'elecciones',
 }
 
-# config para la conexión a la base de la ucu
+# Configuración de la conexión a la base de datos de la UCU
 # config = {
 #     'host': 'mysql.reto-ucu.net',
-#     'port': 5006,
+#     'port': 50006,
 #     'user': 'ic_g4_admin',
 #     'password': 'Bd2025!',
 #     'database': 'IC_Grupo4',
