@@ -26,6 +26,7 @@ def info_login_circuito_mesa(cursor, id_circuito):
 
     return result
 
+
 def mesaRoutes(app):
 
     @app.route("/credenciales-circuito/<int:ie>/<int:id>", methods = ['GET'])
@@ -82,4 +83,25 @@ def mesaRoutes(app):
             return jsonify({"Error: ": str(e)}), 500
         finally:
             cursor.close()
+
+    
+    @app.route("/estado-circuito/<int:id_circuito>", methods=["PUT"])
+    def put_cambio_estado_circuito(id_circuito):
+        try: 
+            cursor = db.cursor(dictionary=True)
+
+            nuevo_estado = request.json["nuevo_estado"]
+            cursor.execute("""UPDATE circuito SET id_estado = %s WHERE id = %s""",
+                        (nuevo_estado, id_circuito,))
+            
+            cursor.execute("""SELECT descripcion FROM estado_circuito WHERE id = %s""", (nuevo_estado,))
+            estado = cursor.fetchone()
+            descripcion_estado = estado["descripcion"]
+            
+            return jsonify({"message": f"Estado del circuito cambiado correctamente a {nuevo_estado} {descripcion_estado}"}), 201
+
+        except Error as e:
+            return jsonify({"Error: ": str(e)}), 500
+        finally:
+            cursor.close()    
     
