@@ -32,8 +32,12 @@ def mesaRoutes(app):
     def get_credenciales_circuito(ie, id):
         try:
             cursor = db.cursor(dictionary=True)
-            cursor.execute("""SELECT serie_credencial, numero_credencial, voto_realizado
-                            FROM credencial_asignada_circuito_instancia_electiva
+            cursor.execute("""SELECT serie_credencial, numero_credencial, voto_realizado, ci.nombre, ci.apellido
+                            FROM credencial_asignada_circuito_instancia_electiva ca
+                                JOIN credencial c 
+                                    ON ca.serie_credencial = c.serie AND ca.numero_credencial = c.numero
+                                JOIN ciudadano ci 
+                                    ON c.ci_ciudadano = ci.ci
                             WHERE id_circuito = %s AND id_instancia_electiva = %s""", 
                             (id, ie,)) # ie es instancia electiva
             result = cursor.fetchall()
@@ -43,6 +47,8 @@ def mesaRoutes(app):
                     numero_credencial
                     serie_credencial
                     voto_realizado (0-1)
+                    nombre
+                    apellido
             """
         except Error as e:
             return jsonify({"Error: ": str(e)}), 500
@@ -54,8 +60,12 @@ def mesaRoutes(app):
     def get_info_voto_credencial(serie, num):
         try:
             cursor = db.cursor(dictionary=True)
-            cursor.execute("""SELECT serie_credencial, numero_credencial, voto_realizado
-                            FROM credencial_asignada_circuito_instancia_electiva
+            cursor.execute("""SELECT serie_credencial, numero_credencial, voto_realizado, ci.nombre, ci.apellido
+                            FROM credencial_asignada_circuito_instancia_electiva ca
+                                JOIN credencial c 
+                                    ON ca.serie_credencial = c.serie AND ca.numero_credencial = c.numero
+                                JOIN ciudadano ci 
+                                    ON c.ci_ciudadano = ci.ci
                             WHERE serie_credencial = %s AND numero_credencial = %s""", 
                             (serie, num,))
             result = cursor.fetchall()
@@ -65,6 +75,8 @@ def mesaRoutes(app):
                     numero_credencial
                     serie_credencial
                     voto_realizado (0-1)
+                    nombre
+                    apellido
             """
         except Error as e:
             return jsonify({"Error: ": str(e)}), 500
