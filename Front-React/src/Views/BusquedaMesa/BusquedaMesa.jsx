@@ -68,7 +68,7 @@ function BusquedaMesa() {
         ))}
       </div>
 
-      {/* Navbar */}
+      {/* Navbar. */}
       <div className="navbar">
         <div className="nav-item active" onClick={() => navigate('/')}>
           <span>🔍</span>
