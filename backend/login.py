@@ -53,7 +53,9 @@ def loginRoutes(app):
                 return jsonify({"error": "Incorrect credentials"}), 401
             
             ci_miembro_mesa = login_data["ci_miembro_mesa"]
-            cursor.execute("SELECT r.descripcion FROM rol_miembro_mesa r JOIN mesa_circuito_instancia_electiva m ON r.id = m.id_rol WHERE m.ci_miembro_mesa = %s", (ci_miembro_mesa,))
+            cursor.execute("""SELECT r.descripcion FROM rol_miembro_mesa r 
+                           JOIN mesa_circuito_instancia_electiva m ON r.id = m.id_rol 
+                           WHERE m.ci_miembro_mesa = %s""", (ci_miembro_mesa,))
             miembro_mesa = cursor.fetchone()
             rol_miembro_mesa = miembro_mesa["descripcion"]
 
