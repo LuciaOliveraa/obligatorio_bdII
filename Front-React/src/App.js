@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { VoteProvider } from './Context/VoteContext';
 import { ROUTES } from './Constants/Routes';
+import BusquedaMesa from './Views/BusquedaMesa/BusquedaMesa';
 
 // Lazy loading para mejor performance
 const Welcome = React.lazy(() => import('./Views/Welcome/Welcome'));
@@ -31,6 +32,11 @@ function App() {
               <Route path={ROUTES.ANULADO} element={<Anulado />} />
               <Route path={ROUTES.CONFIRM_LISTA} element={<Lista />} />
               <Route path={ROUTES.CONFIRMED} element={<VoteConfirmed />} />
+
+              <Route path="/login" component={<LoginMesa />} />
+               <Route path="/buscar" component={<BusquedaMesa />} />
+               <Route path="/confirmacion" component={<ConfirmacionVotante />} />
+               <Route path="/estadisticas" component={<Estadisticas />} />
               <Route path="*" element={<div>Página no encontrada</div>} />
             </Routes>
           </div>
