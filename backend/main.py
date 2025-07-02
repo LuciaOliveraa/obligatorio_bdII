@@ -3,7 +3,7 @@ from flask_cors import CORS
 from connection import get_db_connection
 from totem import totemRoutes
 from login import loginRoutes
-from votacion_totem import votacionRoutes
+from votacion import votacionRoutes
 from mesa import mesaRoutes
 
 app = Flask(__name__)
