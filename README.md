@@ -1,9 +1,15 @@
 # obligatorio_bdII
 
-1. usar usuario y contraseña del root del docker para el datagrip
-2. correr archivo de creacion de entidades base
-3. correr archivo de on delete
-4. correr archivo relaciones
+usar usuario y contraseña del root del docker para el datagrip
+
+## Orden de ejecución de scripts
+1. creacion_db_tablas_base
+2. on_delete_entidades_base
+3. relaciones_tablas
+4. triggers (ahora no, tengo que corregirlos primero)
+5. login_addition
+6. inserciones (a partir del 0 en adelante, en orden)
+7. modificaciones (a partir del 0 en adelante, en orden)
 
 ## Backend
 
