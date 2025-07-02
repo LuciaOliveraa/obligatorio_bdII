@@ -2,6 +2,8 @@ from flask import jsonify, request
 from mysql.connector import Error
 from connection import get_db_connection
 
+from mesa import info_login_circuito_mesa, circuito_de_miembro_mesa
+
 db = get_db_connection()
 
 def loginRoutes(app):
@@ -59,7 +61,20 @@ def loginRoutes(app):
             miembro_mesa = cursor.fetchone()
             rol_miembro_mesa = miembro_mesa["descripcion"]
 
-            return jsonify({"id_circuito": login_data["ci_miembro_mesa"], "rol_miembro_mesa": rol_miembro_mesa})
+            # averiguo circuito correspondiente a este miembro de mesa
+            id_instancia_electiva = request.args.get('ie') 
+            id_circuito = circuito_de_miembro_mesa(cursor, ci_miembro_mesa, id_instancia_electiva)
+            if id_circuito is None:
+                return jsonify({"error": "No se encontró un circuito para ese miembro de mesa en estas elecciones"}), 404
+
+            # averiguo info login correspondiente a este miembro de mesa
+            login_circuito = info_login_circuito_mesa(cursor, id_circuito)
+
+            return jsonify({"ci_miembro_mesa": login_data["ci_miembro_mesa"], 
+                            "rol_miembro_mesa": rol_miembro_mesa, 
+                            "id_circuito": id_circuito,
+                            "usuario_circuito": login_circuito["usuario"],
+                            "contraseña_circuito": login_circuito["contraseña"]})
                 
         except Error as error:
             return jsonify({"error": str(error)}), 500
