@@ -110,12 +110,11 @@ def mesaRoutes(app):
     def get_resultados_circuito(id):
         try:
             cursor = db.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM resultados_candidato_eleccion_circuito WHERE circuito=%s", (id, ))
+            cursor.execute("SELECT * FROM resultados_eleccion_circuito WHERE circuito=%s", (id, ))
             result = cursor.fetchall()
 
             return jsonify(result), 200
             """ devuelve lista:
-                    candidato
                     cantidad_de_votos
                     circuito
                     eleccion
