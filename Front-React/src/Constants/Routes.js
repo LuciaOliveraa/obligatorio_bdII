@@ -12,7 +12,7 @@ export const ROUTES = {
 
   LOGINMESA: '/loginmesa',
   BUSQUEDAMESA: '/busqueda-mesa',
-  CONFIRMACIONVOTANTE: '/confirmacion',
+  CONFIRMACIONVOTANTE: '/confirmacionvotante',
   ESTADISTICAS: '/estadisticas'
 
 };
