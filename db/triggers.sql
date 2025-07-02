@@ -13,7 +13,7 @@ BEGIN
     SELECT id_partido_politico
     INTO partido_papeleta
     FROM papeleta_lista
-    WHERE id_papeleta_lista = NEW.id_papeleta_lista;
+    WHERE papeleta_lista.id = NEW.papeleta_lista.id;
 
     -- Comparar con el valor insertado
     IF partido_papeleta IS NULL THEN

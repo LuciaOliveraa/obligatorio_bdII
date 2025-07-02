@@ -46,3 +46,4 @@ def totemRoutes(app):
             return jsonify({"Error: ": str(e)}), 500
         finally:
             cursor.close()
+            

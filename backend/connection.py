@@ -9,6 +9,15 @@ config = {
     'database': 'elecciones',
 }
 
+# config para la conexión a la base de la ucu
+# config = {
+#     'host': 'mysql.reto-ucu.net',
+#     'port': 5006,
+#     'user': 'ic_g4_admin',
+#     'password': 'Bd2025!',
+#     'database': 'IC_Grupo4',
+# }
+
 # Conectar a la base de datos y devolver la conexión
 def get_db_connection():
     try:
@@ -17,3 +26,4 @@ def get_db_connection():
     except Error as e:
         print(f"Error connecting to MySQL: {e}")
         return None
+    

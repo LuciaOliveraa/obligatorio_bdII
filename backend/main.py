@@ -1,8 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 from connection import get_db_connection
 from totem import totemRoutes
+from login import loginRoutes
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def index():
@@ -20,6 +23,7 @@ def status_db():
     return status
 
 totemRoutes(app)
+loginRoutes(app)
 
 if __name__ == "__main__":
     app.run()
