@@ -48,3 +48,14 @@ def mesaRoutes(app):
             return jsonify({"Error: ": str(e)}), 500
         finally:
             cursor.close()
+
+
+    def circuito_de_miembro_mesa(cursor, ci_miembro_mesa, id_instancia_electiva):
+        cursor.execute("""SELECT id_circuito
+                       FROM mesa_circuito_instancia_electiva
+                       WHERE ci_miembro_mesa = %s AND id_instancia_electiva = %s""",
+                       (ci_miembro_mesa, id_instancia_electiva))
+        result = cursor.fetchone()
+
+        return jsonify(result), 200
+    

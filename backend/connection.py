@@ -1,5 +1,11 @@
 import mysql.connector
 from mysql.connector import Error
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Carga las variables del archivo .env
+
+db_password = os.getenv('DB_PASSWORD')
 
 # Configuración de la conexión a la base de datos
 # config = {
@@ -14,7 +20,7 @@ config = {
     'host': 'mysql.reto-ucu.net',
     'port': 50006,
     'user': 'ic_g4_admin',
-    'password': 'Bd2025!',
+    'password': db_password,
     'database': 'IC_Grupo4',
 }
 
