@@ -4,6 +4,28 @@ from connection import get_db_connection
 
 db = get_db_connection()
 
+def circuito_de_miembro_mesa(cursor, ci_miembro_mesa, id_instancia_electiva):
+    print("ci " , ci_miembro_mesa)
+    print("ie " , id_instancia_electiva)
+    cursor.execute("""SELECT id_circuito
+                    FROM mesa_circuito_instancia_electiva
+                    WHERE ci_miembro_mesa = %s AND id_instancia_electiva = %s""",
+                    (ci_miembro_mesa, id_instancia_electiva,))
+    result = cursor.fetchone()
+
+    if result:
+        return result["id_circuito"]
+    else:
+        return None
+
+def info_login_circuito_mesa(cursor, id_circuito):
+    cursor.execute("""SELECT usuario, contraseña
+                    FROM login_circuito
+                    WHERE id_circuito = %s""", (id_circuito,))
+    result = cursor.fetchone()
+
+    return result
+
 def mesaRoutes(app):
 
     @app.route("/credenciales-circuito/<int:ie>/<int:id>", methods = ['GET'])
@@ -48,14 +70,4 @@ def mesaRoutes(app):
             return jsonify({"Error: ": str(e)}), 500
         finally:
             cursor.close()
-
-
-    def circuito_de_miembro_mesa(cursor, ci_miembro_mesa, id_instancia_electiva):
-        cursor.execute("""SELECT id_circuito
-                       FROM mesa_circuito_instancia_electiva
-                       WHERE ci_miembro_mesa = %s AND id_instancia_electiva = %s""",
-                       (ci_miembro_mesa, id_instancia_electiva))
-        result = cursor.fetchone()
-
-        return jsonify(result), 200
     
