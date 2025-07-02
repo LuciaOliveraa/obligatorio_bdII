@@ -56,25 +56,11 @@ def totemRoutes(app):
             result = cursor.fetchall()
 
             return jsonify(result), 200
+            """ devuelve:
+                id_circuito
+                accesible (0-1)
+                id_estado (1, 2, 3)"""
         except Error as e:
             return jsonify({"Error: ": str(e)}), 500
         finally:
             cursor.close()
-
-
-    @app.route("/credenciales-circuito/<int:id>", methods = ['GET'])
-    def get_credenciales_circuito(id):
-        try:
-            cursor = db.cursor(dictionary=True)
-            cursor.execute("""SELECT serie_credencial, numero_credencial
-                            FROM credencial_asignada_circuito_instancia_electiva
-                            WHERE id_circuito = %s;""", 
-                            (id, ))
-            result = cursor.fetchall()
-
-            return jsonify(result), 200
-        except Error as e:
-            return jsonify({"Error: ": str(e)}), 500
-        finally:
-            cursor.close()
-
