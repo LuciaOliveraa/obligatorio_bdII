@@ -3,6 +3,7 @@ from flask_cors import CORS
 from connection import get_db_connection
 from totem import totemRoutes
 from login import loginRoutes
+from votacion_totem import votacionTotemRoutes
 
 app = Flask(__name__)
 CORS(app)
@@ -24,6 +25,7 @@ def status_db():
 
 totemRoutes(app)
 loginRoutes(app)
+votacionTotemRoutes(app)
 
 if __name__ == "__main__":
     app.run()
