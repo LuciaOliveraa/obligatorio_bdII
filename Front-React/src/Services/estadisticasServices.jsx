@@ -8,3 +8,4 @@ export const getResultadosCircuito = async (idEleccion, idCircuito) => {
     }
 };
 
+"esto es una prueba de commit para ver si funciona el push desde la terminal";
