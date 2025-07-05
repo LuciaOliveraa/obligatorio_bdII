@@ -1,10 +1,12 @@
 -- Esta VIEW agrupa los resultados de cada elección
--- Dentro de cada elección separa los votos por: departamento, tipo de voto y partido político
+-- Dentro de cada elección separa los votos por: departamento, tipo de voto y candidato
 -- Cuenta la cantidad de votos dentro de cada grupo y muestra el porcentaje de esa categoría dentro de ese departamento y elección.
+-- También muestra el partido político de cada candidato.
 
-CREATE OR REPLACE VIEW resultados_eleccion_departamento AS
+CREATE OR REPLACE VIEW resultados_candidato_eleccion_departamento AS
     SELECT e.id as eleccion,
            d.nombre as departamento,
+           CONCAT(c.nombre, ' ', c.apellido) as candidato,
            CASE
                WHEN tv.descripcion = 'Papeleta' THEN pp.nombre  -- si el voto es blanco o anulado, no tiene papeleta
                ELSE null
@@ -39,5 +41,11 @@ CREATE OR REPLACE VIEW resultados_eleccion_departamento AS
             ON pv.id_papeleta = pl.id
         LEFT JOIN partido_politico pp
             ON pl.id_partido_politico = pp.id
-    GROUP BY eleccion, departamento, partido_politico, tipo_voto
-    ORDER BY eleccion, departamento, partido_politico, tipo_voto;
+        -- Joins para averiguar candidato a Presidente
+        LEFT JOIN integrante_en_papeleta_lista ipl
+            ON pl.id = ipl.id_papeleta_lista
+        LEFT JOIN ciudadano c
+            ON ipl.id_integrante = c.ci
+    WHERE ipl.id_rol = 1 -- donde el integrante sea candidato a Presidente
+    GROUP BY eleccion, departamento, candidato, partido_politico, tipo_voto
+    ORDER BY eleccion, departamento, candidato, partido_politico, tipo_voto;
