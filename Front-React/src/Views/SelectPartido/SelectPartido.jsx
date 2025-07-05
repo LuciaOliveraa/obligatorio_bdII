@@ -1,17 +1,30 @@
 "En esta pantalla el usuario ya confirmó que va a votar una lista, ahora debe seleccionar el partido de la lista a votar."
-
-import { useState } from 'react';
+import React from 'react';
+import axios from 'axios'
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useVote } from '../../Context/VoteContext';
 import '../../Styles/Common.css';
 import '../../Styles/SelectPartido.css';
+import { use } from 'react';
 
-const partidosDisponibles = ['Partido A', 'Partido B', 'Partido C'];
+//const partidosDisponibles = ['Partido A', 'Partido B', 'Partido C'];
 
 const SelectPartido = () => {
   const { setSelectedPartido } = useVote();
   const [partidoSeleccionado, setPartidoSeleccionado] = useState(null);
+  const [partidosDisponibles, setPartidosDisponibles] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/partidos")
+      .then ((res) => {
+        setPartidosDisponibles(res.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los partidos:", error);
+      });
+  }, []);
 
   const handleSeleccion = (partido) => {
     setPartidoSeleccionado(partido);
@@ -33,11 +46,11 @@ const SelectPartido = () => {
       <div className="botones-partido">
         {partidosDisponibles.map((partido) => (
           <button
-            key={partido}
-            className={`partido-button ${partidoSeleccionado === partido ? 'selected' : ''}`}
+            key={partido.id}
+            className={`partido-button ${partidoSeleccionado?.id === partido.id ? 'selected' : ''}`}
             onClick={() => handleSeleccion(partido)}
           >
-            {partido}
+            {partido.nombre}
           </button>
         ))}
       </div>
