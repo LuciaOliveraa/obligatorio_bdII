@@ -32,7 +32,6 @@ def loginRoutes(app):
             cursor.close()
 
 
-
     @app.route('/login-totem', methods=['POST'])
     def login_totem():
         cursor = db.cursor(dictionary=True)
