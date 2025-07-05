@@ -19,7 +19,7 @@ export const postVoto = async (circuito, instancia_electiva, observado, papeleta
         id_instancia_electiva: instancia_electiva,
         fecha_hora: obtenerFechaHoraActual(),
         observado: observado,       // 0 no observado, 1 observado
-        papeleta: papeleta
+        papeleta: papeleta          // si voto es blanco o anulado, en papeleta poner null
     }
 
     /* id_tipo_voto:
