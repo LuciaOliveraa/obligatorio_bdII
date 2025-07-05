@@ -22,12 +22,11 @@ def votacionRoutes(app):
             id_circuito = request.json['id_circuito']
             id_instancia_electiva = request.json['id_instancia_electiva']
             fecha_hora = request.json['fecha_hora']
-            observado = request.json['observado']
 
             cursor.execute("""INSERT INTO voto_circuito_en_instancia_electiva 
-                           (id_circuito, id_instancia_electiva, fecha_hora, observado, id_tipo_voto) 
-                           VALUES (%s, %s, %s, %s, %s)""", 
-                           (id_circuito, id_instancia_electiva, fecha_hora, observado, id_tipo_voto,))
+                           (id_circuito, id_instancia_electiva, fecha_hora, id_tipo_voto) 
+                           VALUES (%s, %s, %s, %s)""", 
+                           (id_circuito, id_instancia_electiva, fecha_hora, id_tipo_voto,))
             
             id_voto = cursor.lastrowid      # selecciona el id auto generado del voto ingresado
             id_papeleta_en_voto = request.json.get('papeleta')      # usamos get() para que no de KeyError en el caso de que el campo no esté presente
