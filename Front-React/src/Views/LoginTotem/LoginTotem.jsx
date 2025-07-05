@@ -38,7 +38,7 @@ function LoginTotem() {
                     <label className="input-label">Usuario</label>
                     <input 
                         type="text" 
-                        placeholder="totem-circuito-xxx" 
+                        placeholder="circuitoX" 
                         value={usuario}
                         onChange={(e) => setUsuario(e.target.value)}
                         required 
