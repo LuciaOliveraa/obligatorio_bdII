@@ -1,9 +1,7 @@
 html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
   background-color: #D9D9D9;
 }
 
@@ -17,14 +15,9 @@ html, body {
 
 /* Encabezado */
 .header {
-  position: relative;
-  left: 0;
-  right: 0;
-  top: 0;
-  width: 100vw; 
-  margin: 0;
-  padding: 20px 0;
   background-color: #E8F2FF;
+  width: 100%; /* Cambia min-width por width */
+  padding: 20px 0;
   text-align: center;
   display: flex;
   align-items: center;
@@ -32,6 +25,7 @@ html, body {
   gap: 20px;
   flex-wrap: wrap;
 }
+
 .escudo {
   width: 300px;
 }
@@ -86,15 +80,4 @@ input[type="password"] {
 
 .vote-button:hover {
   background-color: #053b6a;
-}
-
-
-.error-message {
-  color: red;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-* {
-  box-sizing: border-box;
 }
