@@ -15,7 +15,7 @@ function LoginMesa() {
         e.preventDefault();
         setError('');
 
-        const idInstanciaElectiva = 1; // Este valor debería ser dinámico, quizás pasado como prop o desde contexto 
+        const idInstanciaElectiva = 1; 
 
         try{
             const data = await loginMesa(usuario, contraseña, idInstanciaElectiva);
@@ -37,15 +37,15 @@ function LoginMesa() {
             </div>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
-                    <label className="input-label">Email</label>
+                    <label className="input-label">Usuario</label>
                     <input 
                         type="text" 
-                        placeholder="ejemplo@gmail.com" 
+                        placeholder="mmesaX" 
                         value= {usuario}
                         onChange={(e) => setUsuario(e.target.value)}
                         required 
                     />
-                    <label className="input-label">Password</label>
+                    <label className="input-label">Contraseña</label>
                     <input 
                         type="password" 
                         placeholder="C0ntr4señA" 
