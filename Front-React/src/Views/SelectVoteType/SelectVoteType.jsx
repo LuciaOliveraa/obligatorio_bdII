@@ -8,17 +8,34 @@ import VoteButton from '../../Components/VoteButton/VoteButton';
 import { ROUTES } from '../../Constants/Routes';
 import '../../Styles/Common.css';
 import '../../Styles/SelectVoteType.css';
+import { getVoteTypes } from "../../Services/totemServices";
 
-const VOTE_TYPES = [
-  { id: 'lista', label: 'Lista', variant: 'primary' },
-  { id: 'blanco', label: 'Blanco', variant: 'primary' },
-  { id: 'anulado', label: 'Anulado', variant: 'primary' }
-];
+// Test conexión con backend
+
+// const VOTE_TYPES = [
+//   { id: 'lista', label: 'Lista', variant: 'primary' },
+//   { id: 'blanco', label: 'Blanco', variant: 'primary' },
+//   { id: 'anulado', label: 'Anulado', variant: 'primary' }
+// ];
 
 const SelectVoteType = () => {
   const { setVoteType, resetVote } = useVote();
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
+  const [voteTypes, setVoteTypes] = useState([]);
+
+  const fetchVoteTypes = async () => {
+  try{
+    const data = await getVoteTypes();
+    setVoteTypes(data);
+  }catch(error){
+    console.log("Error")
+  }
+}
+
+  useEffect(() => {
+    fetchVoteTypes();
+  },[]);
 
   useEffect(() => {
     resetVote(); 
@@ -30,10 +47,11 @@ const SelectVoteType = () => {
 
   const handleNext = () => {
     setVoteType(selected);
+    console.log(selected);
     const routeMap = {
-      'lista': ROUTES.PARTIDO,
-      'blanco': ROUTES.BLANCO,
-      'anulado': ROUTES.ANULADO
+      '1': ROUTES.PARTIDO,
+      '2': ROUTES.BLANCO,
+      '3': ROUTES.ANULADO
     };
     navigate(routeMap[selected]);
   };
@@ -42,12 +60,12 @@ const SelectVoteType = () => {
     <div className="seleccion-container">
       <h2>Seleccione la papeleta a votar:</h2>
       <div className="botones-tipo">
-        {VOTE_TYPES.map(({ id, label, variant }) => (
+        {voteTypes.map(({ id, descripcion }) => (
           <VoteButton
             key={id}
-            label={label}
+            label={descripcion}
             onClick={() => handleSelect(id)}
-            variant={selected === id ? variant : 'secondary'}
+            variant={selected === id ? 'primary' : 'secondary'}
             fullWidth
           />
         ))}
