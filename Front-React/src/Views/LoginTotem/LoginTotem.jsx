@@ -35,15 +35,15 @@ function LoginTotem() {
             </div>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
-                    <label className="input-label">Usuario</label>
+                    <label className="input-label">Usuario *</label>
                     <input 
                         type="text" 
-                        placeholder="circuitoX" 
+                        placeholder="circuito" 
                         value={usuario}
                         onChange={(e) => setUsuario(e.target.value)}
                         required 
                     />
-                    <label className="input-label">Contraseña</label>
+                    <label className="input-label">Contraseña *</label>
                     <input 
                         type="password" 
                         placeholder="C0ntr4señA"
