@@ -104,4 +104,47 @@ def mesaRoutes(app):
             return jsonify({"Error: ": str(e)}), 500
         finally:
             cursor.close()    
+
+
+    @app.route("/resultados-circuito/<int:id>", methods = ['GET'])
+    def get_resultados_circuito(id):
+        try:
+            cursor = db.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM resultados_eleccion_circuito WHERE circuito=%s", (id, ))
+            result = cursor.fetchall()
+
+            return jsonify(result), 200
+            """ devuelve lista:
+                    cantidad_de_votos
+                    circuito
+                    eleccion
+                    partido_politico
+                    porcentaje_en_circuito_eleccion
+                    tipo_voto"""
+        except Error as e:
+            return jsonify({"Error: ": str(e)}), 500
+        finally:
+            cursor.close()
+
+    
+    @app.route("/resultados-candidato-circuito/<int:id>", methods = ['GET'])
+    def get_resultados_candidato_circuito(id):
+        try:
+            cursor = db.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM resultados_candidato_eleccion_circuito WHERE circuito=%s", (id, ))
+            result = cursor.fetchall()
+
+            return jsonify(result), 200
+            """ devuelve lista:
+                    candidato
+                    cantidad_de_votos
+                    circuito
+                    eleccion
+                    partido_politico
+                    porcentaje_en_circuito_eleccion
+                    tipo_voto"""
+        except Error as e:
+            return jsonify({"Error: ": str(e)}), 500
+        finally:
+            cursor.close()
     
