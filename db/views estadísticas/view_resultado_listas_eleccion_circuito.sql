@@ -1,15 +1,14 @@
 -- Esta VIEW agrupa los resultados de cada elección
--- Dentro de cada elección separa los votos por: circuito, tipo de voto y candidato
+-- Dentro de cada elección separa los votos por: circuito, lista, tipo de voto y partido político
 -- Cuenta la cantidad de votos dentro de cada grupo y muestra el porcentaje de esa categoría dentro de ese circuito y elección.
--- También muestra el partido político de cada candidato.
 
-CREATE OR REPLACE VIEW resultados_candidato_eleccion_circuito AS
+CREATE OR REPLACE VIEW resultados_eleccion_circuito_lista AS
     SELECT e.id as eleccion,
            cie.id_circuito as circuito,
-           CONCAT(c.nombre, ' ', c.apellido) as candidato,
+           pl.num_lista as lista,
            CASE
                WHEN tv.descripcion = 'Papeleta' THEN pp.nombre
-               ELSE '-'
+               ELSE null
            end as partido_politico,
            tv.descripcion as tipo_voto,
            COUNT(vcie.id_voto) as cantidad_de_votos,
@@ -32,9 +31,5 @@ CREATE OR REPLACE VIEW resultados_candidato_eleccion_circuito AS
             ON pv.id_papeleta = pl.id
         LEFT JOIN partido_politico pp
             ON pl.id_partido_politico = pp.id
-        LEFT JOIN integrante_en_papeleta_lista ipl
-            ON pl.id = ipl.id_papeleta_lista AND ipl.id_rol = 1 -- donde el integrante sea candidato a Presidente
-        LEFT JOIN ciudadano c
-            ON ipl.id_integrante = c.ci
-    GROUP BY eleccion, circuito, candidato, partido_politico, tipo_voto
-    ORDER BY eleccion, circuito, candidato, partido_politico, tipo_voto;
+    GROUP BY eleccion, circuito, lista, partido_politico, tipo_voto
+    ORDER BY eleccion, circuito, lista, partido_politico, tipo_voto;

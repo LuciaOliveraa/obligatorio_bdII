@@ -5,6 +5,7 @@ from totem import totemRoutes
 from login import loginRoutes
 from votacion import votacionRoutes
 from mesa import mesaRoutes
+from estadisticas import estadisticasRoutes
 
 app = Flask(__name__)
 CORS(app)
@@ -28,6 +29,7 @@ totemRoutes(app)
 loginRoutes(app)
 votacionRoutes(app)
 mesaRoutes(app)
+estadisticasRoutes(app)
 
 if __name__ == "__main__":
     app.run()
