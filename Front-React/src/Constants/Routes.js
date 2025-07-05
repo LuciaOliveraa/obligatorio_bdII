@@ -11,8 +11,9 @@ export const ROUTES = {
   CONFIRMED: '/vote-confirmed',
 
   LOGINMESA: '/loginmesa',
-  BUSQUEDA_MESA: '/buscar',
-  CONFIRMACION_VOTANTE: '/confirmacion',
+  BUSQUEDAMESA: '/busqueda-mesa',
+  CONFIRMACIONVOTANTE: '/confirmacionvotante',
+  VOTANTEHABILITADO: '/votantehabilitado',
   ESTADISTICAS: '/estadisticas'
 
 };

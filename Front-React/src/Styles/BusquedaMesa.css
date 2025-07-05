@@ -1,27 +1,118 @@
-/* BusquedaMesa.css */
 .busqueda-mesa {
-  background-color: #D9D9D9;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
+  background-color: #d9d9d9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: Arial, sans-serif;
 }
 
 .header {
-  background-color: #E8F2FF;
-  padding: 10px;
-  text-align: center;
+  background-color: #e8f2ff;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  justify-content: flex-start;
+}
+
+.logo {
+  height: 80px;
+  margin-right: 20px;
 }
 
 .title {
-  color: #07458B;
-  font-size: 24px;
+  color: #07458b;
+  font-size: 40px;
   font-weight: bold;
+  flex: 1;
+  text-align: center;
+  display:flex
 }
 
-.input-field {
-  margin: 10px 0;
+.buscador-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
 }
 
-/* Estilo para el botón de búsqueda */
-.vote-button {
-  margin-top: 10px;
+.buscador {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.lista-votantes {
+  padding: 0 30px;
+  flex-grow: 1;
+}
+
+.votante {
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nombre {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+
+.switch {
+  width: 40px;
+  height: 20px;
+  position: relative;
+  appearance: none;
+  background: #ccc;
+  outline: none;
+  border-radius: 20px;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.switch:checked {
+  background: #4caf50;
+}
+
+.switch::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.switch:checked::before {
+  transform: translateX(20px);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #e8f2ff;
+  padding: 10px 0;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+}
+
+.nav-item.active {
+  border-top: 3px solid #07458b;
 }
