@@ -1,7 +1,8 @@
 "Rutas a utilizar en la aplicación"
 
 export const ROUTES = {
-  WELCOME: '/',
+  LOGINTOTEM: '/',
+  WELCOME: '/welcome',
   VOTE_TYPE: '/select-vote-type',
   PARTIDO: '/select-partido',
   LISTA: '/select-lista',
