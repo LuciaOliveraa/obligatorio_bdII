@@ -81,3 +81,10 @@ input[type="password"] {
 .vote-button:hover {
   background-color: #053b6a;
 }
+
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+}
