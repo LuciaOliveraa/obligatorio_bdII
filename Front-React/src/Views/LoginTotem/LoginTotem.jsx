@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginMesa } from "../../Services/loginServices";
-import '../../Styles/LoginMesa.css'; 
+import { loginTotem } from "../../Services/loginServices";
+import '../../Styles/LoginTotem.css'; 
 
-function LoginMesa() {
+function LoginTotem() {
     const navigate = useNavigate();
 
     const [usuario, setUsuario] = useState('');
@@ -13,22 +13,20 @@ function LoginMesa() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
-
-        const idInstanciaElectiva = 1; 
+        setError(''); 
 
         try{
-            const data = await loginMesa(usuario, contraseña, idInstanciaElectiva);
-            console.log("Login miembro de mesa:", data);
+            const data = await loginTotem(usuario, contraseña);
+            console.log("Login exitoso. ID Circuito:", data.id_circuito);
 
-            navigate('/busqueda-mesa'); 
-        } catch (err) {
+            navigate('/Welcome'); 
+        } catch (error) {
             setError('Usuario o contraseña incorrectos. Intente nuevamente.');
-        }
+        } 
     };
 
     return (
-        <div className="login-mesa">
+        <div className="login-totem">
             <div className="header">
                 <img src="/logo.png" alt="Escudo de Uruguay" className="escudo" />
                 <h2 className="header-title">
@@ -37,20 +35,20 @@ function LoginMesa() {
             </div>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
-                    <label className="input-label">Usuario</label>
+                    <label className="input-label">Usuario *</label>
                     <input 
                         type="text" 
-                        placeholder="mmesaX" 
-                        value= {usuario}
+                        placeholder="circuito" 
+                        value={usuario}
                         onChange={(e) => setUsuario(e.target.value)}
                         required 
                     />
-                    <label className="input-label">Contraseña</label>
+                    <label className="input-label">Contraseña *</label>
                     <input 
                         type="password" 
-                        placeholder="C0ntr4señA" 
-                        value= {contraseña}
-                        onChange={(e) => setContraseña(e.target.value)}
+                        placeholder="C0ntr4señA"
+                        value={contraseña}
+                        onChange={(e) => setContraseña(e.target.value)} 
                         required 
                     />
                     {error && <p className="error-message">{error}</p>}
@@ -61,4 +59,4 @@ function LoginMesa() {
     );
 }
 
-export default LoginMesa;
+export default LoginTotem;

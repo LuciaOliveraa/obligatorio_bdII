@@ -8,7 +8,7 @@ html, body {
 }
 
 /* Contenedor principal */
-.login-mesa {
+.login-totem {
   min-height: 100vh;
   width: 100%;
   display: flex;
