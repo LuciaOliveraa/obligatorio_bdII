@@ -47,4 +47,3 @@ export const loginMesa = async (usuario, contraseña, idInstanciaElectiva) => {
 };
 
 
-"dddd"

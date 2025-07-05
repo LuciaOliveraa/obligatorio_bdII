@@ -5,7 +5,6 @@ import { VoteProvider } from './Context/VoteContext';
 import { ROUTES } from './Constants/Routes';
 
 // Lazy loading para mejor performance
-const LoginTotem = React.lazy(() => import('./Views/LoginTotem/LoginTotem'));
 const Welcome = React.lazy(() => import('./Views/Welcome/Welcome'));
 const SelectVoteType = React.lazy(() => import('./Views/SelectVoteType/SelectVoteType'));
 const SelectPartido = React.lazy(() => import('./Views/SelectPartido/SelectPartido'));
@@ -31,7 +30,6 @@ function App() {
         <React.Suspense fallback={<Loading />}>
           <div className="app-container">
             <Routes>
-              <Route path={ROUTES.LOGINTOTEM} element={<LoginTotem />} />
               <Route path={ROUTES.WELCOME} element={<Welcome />} />
               <Route path={ROUTES.VOTE_TYPE} element={<SelectVoteType />} />
               <Route path={ROUTES.PARTIDO} element={<SelectPartido />} />
