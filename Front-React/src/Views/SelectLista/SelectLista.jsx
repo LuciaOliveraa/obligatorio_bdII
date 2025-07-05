@@ -42,7 +42,7 @@ const SelectLista = () => {
   return (
     <div className="lista-container">
       <button className="flecha-back" onClick={handleCancelar}>←</button>
-      <h2>Listas de {selectedPartido}</h2>
+      <h2>Listas de {selectedPartido.nombre}</h2>
       <div className="botones-lista">
         {listas.map((lista) => (
           <button
