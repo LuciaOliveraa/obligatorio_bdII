@@ -5,12 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useVote } from '../../Context/VoteContext';
 import '../../Styles/Common.css';
 import '../../Styles/SelectLista.css';
-
-const listasPorPartido = {
-  'Partido A': ['Lista A1', 'Lista A2'],
-  'Partido B': ['Lista B1', 'Lista B2'],
-  'Partido C': ['Lista C1', 'Lista C2'],
-};
+import { getListasPartido } from "../../Services/totemServices";
 
 const SelectLista = () => {
   const { selectedPartido, setSelectedList } = useVote();
@@ -18,9 +13,22 @@ const SelectLista = () => {
   const [listas, setListas] = useState([]);
   const navigate = useNavigate();
 
+  const fetchListasPartido = async () => {
+    try{
+      const data = await getListasPartido(selectedPartido.id);
+      setListas(data);
+    }catch(error){
+      console.log("Error")
+    }
+  }
+  
+  useEffect(() => {
+    fetchListasPartido();
+  },[]);
+
   useEffect(() => {
     if (selectedPartido) {
-      setListas(listasPorPartido[selectedPartido] || []);
+      fetchListasPartido();
     } else {
       navigate('/select-partido');
     }
@@ -44,13 +52,13 @@ const SelectLista = () => {
       <button className="flecha-back" onClick={handleCancelar}>←</button>
       <h2>Listas de {selectedPartido.nombre}</h2>
       <div className="botones-lista">
-        {listas.map((lista) => (
+        {Array.isArray(listas) && listas.map((lista) => (
           <button
-            key={lista}
+            key={lista.id}
             className={`lista-button ${listaSeleccionada === lista ? 'selected' : ''}`}
             onClick={() => handleSeleccion(lista)}
           >
-            {lista}
+            {lista.lema}
           </button>
         ))}
       </div>
