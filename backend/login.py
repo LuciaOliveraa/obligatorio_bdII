@@ -8,6 +8,31 @@ db = get_db_connection()
 
 def loginRoutes(app):
 
+    @app.route('/instancia-electiva/', methods=['GET'])
+    def get_ie():
+        cursor = db.cursor(dictionary=True)
+        fecha_actual = request.json['fecha_actual'] # Debe recibir fecha en formato YYYY-MM-DD
+
+        try:
+            cursor.execute("""SELECT ie.id as instancia_electiva, eie.id_eleccion
+                            FROM instancia_electiva ie
+                            JOIN eleccion_en_instancia_electiva eie
+                             WHERE fecha = %s""", (fecha_actual,))
+            result = cursor.fetchall()
+            
+            return jsonify(result), 200
+            """ devuelve lista:
+                id_eleccion
+                instancia_electiva
+                """
+                
+        except Error as error:
+            return jsonify({"error": str(error)}), 500
+        finally:
+            cursor.close()
+
+
+
     @app.route('/login-totem', methods=['POST'])
     def login_totem():
         cursor = db.cursor(dictionary=True)
