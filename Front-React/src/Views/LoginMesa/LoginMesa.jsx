@@ -1,13 +1,30 @@
 import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginMesa } from "../../Services/loginServices";
 import '../../Styles/LoginMesa.css'; 
 
 function LoginMesa() {
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const [usuario, setUsuario] = useState('');
+    const [contraseña, setContraseña] = useState('');
+    const [error, setError] = useState('');
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/busqueda-mesa'); 
+        setError('');
+
+        const idInstanciaElectiva = 1; // Este valor debería ser dinámico, quizás pasado como prop o desde contexto 
+
+        try{
+            const data = await loginMesa(usuario, contraseña, idInstanciaElectiva);
+            console.log("Login miembro de mesa:", data);
+
+            navigate('/busqueda-mesa'); 
+        } catch (err) {
+            setError('Usuario o contraseña incorrectos. Intente nuevamente.');
+        }
     };
 
     return (
@@ -21,9 +38,22 @@ function LoginMesa() {
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <label className="input-label">Email</label>
-                    <input type="text" placeholder="ejemplo@gmail.com" required />
+                    <input 
+                        type="text" 
+                        placeholder="ejemplo@gmail.com" 
+                        value= {usuario}
+                        onChange={(e) => setUsuario(e.target.value)}
+                        required 
+                    />
                     <label className="input-label">Password</label>
-                    <input type="password" placeholder="C0ntr4señA" required />
+                    <input 
+                        type="password" 
+                        placeholder="C0ntr4señA" 
+                        value= {contraseña}
+                        onChange={(e) => setContraseña(e.target.value)}
+                        required 
+                    />
+                    {error && <p className="error-message">{error}</p>}
                     <button type="submit" className="vote-button">Ingresar</button>
                 </form>
             </div>
