@@ -10,14 +10,6 @@ import '../../Styles/Common.css';
 import '../../Styles/SelectVoteType.css';
 import { getVoteTypes } from "../../Services/totemServices";
 
-// Test conexión con backend
-
-// const VOTE_TYPES = [
-//   { id: 'lista', label: 'Lista', variant: 'primary' },
-//   { id: 'blanco', label: 'Blanco', variant: 'primary' },
-//   { id: 'anulado', label: 'Anulado', variant: 'primary' }
-// ];
-
 const SelectVoteType = () => {
   const { setVoteType, resetVote } = useVote();
   const [selected, setSelected] = useState(null);
@@ -47,7 +39,6 @@ const SelectVoteType = () => {
 
   const handleNext = () => {
     setVoteType(selected);
-    console.log(selected);
     const routeMap = {
       '1': ROUTES.PARTIDO,
       '2': ROUTES.BLANCO,
