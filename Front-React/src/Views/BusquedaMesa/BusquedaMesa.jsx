@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import '../../Styles/BusquedaMesa.css';
 import './BusquedaMesa.css';
 import { getCredencialesCircuito, getAllCredenciales } from '../../Services/mesaServices';
+import { useMesaAuth } from '../../Context/MesaAuthContext'
 
 function BusquedaMesa() {
+  const { mesaAuth } = useMesaAuth();
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [votantes, setVotantes] = useState([]);
@@ -16,7 +18,7 @@ function BusquedaMesa() {
   // Trae las credenciales habilitadas para el circuito
   const fetchCredencialesCircuito = async () => {
     try {
-      const data = await getCredencialesCircuito(1, 1); /* (id_ie, id_circuito) hardcodeadas */
+      const data = await getCredencialesCircuito(mesaAuth.idInstanciaElectiva, mesaAuth.idCircuito); /* (id_ie, id_circuito) hardcodeadas */
       setVotantes(data);
       console.log("DATA DESDE BACKEND not all:", data);
       setListaVotantes(data);
@@ -28,7 +30,7 @@ function BusquedaMesa() {
   // Trae todas las credenciales de la eleccion
   const fetchAllCredenciales = async () => {
     try {
-      const data = await getAllCredenciales(1); /* (id_ie) hardcodeado */
+      const data = await getAllCredenciales(mesaAuth.idInstanciaElectiva); /* (id_ie) hardcodeado */
       console.log("DATA DESDE BACKEND:", data);
       setAllVotantes(data);
     } catch (error) {
