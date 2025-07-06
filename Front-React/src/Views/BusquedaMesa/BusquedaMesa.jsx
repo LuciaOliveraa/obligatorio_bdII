@@ -6,14 +6,9 @@ import { getCredencialesCircuito, getAllCredenciales } from '../../Services/mesa
 function BusquedaMesa() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
-  const [votantes, setVotantes] = useState([
-    { id: 1, nombre: 'Credencial2', isObserved: true },
-    { id: 2, nombre: 'Credencial3', isObserved: false },
-    { id: 3, nombre: 'Menu Item', isObserved: true },
-    { id: 4, nombre: 'Menu Item', isObserved: true },
-    { id: 5, nombre: 'Menu Item', isObserved: true }
-  ]);
+  const [votantes, setVotantes] = useState([]);
   const [allVotantes, setAllVotantes] = useState([]);
+  const [hasFetchedAll, setHasFetchedAll] = useState(false);
 
   // Trae las credenciales habilitadas para el circuito
   const fetchCredencialesCircuito = async () => {
@@ -37,11 +32,18 @@ function BusquedaMesa() {
 
   useEffect(() => {
     fetchCredencialesCircuito();
-    //fetchAllCredenciales();
   }, []);
 
-  const filtered = votantes?.filter(user =>
-    typeof query === 'string' && user.nombre.toLowerCase().includes(query.toLowerCase())
+  useEffect(() => {
+    if (query.trim() !== '' && !hasFetchedAll) {
+      fetchAllCredenciales();
+      setHasFetchedAll(true);
+    }
+  }, [query, hasFetchedAll]);   // Solo se hace el fetch de all-credenciales si se hace una búsqueda.
+
+
+  const filtered = allVotantes?.filter(user =>
+    typeof query === 'string' && user.serie_credencial.toLowerCase().includes(query.toLowerCase())
   );
 
   const handleToggle = (e, userId) => {
