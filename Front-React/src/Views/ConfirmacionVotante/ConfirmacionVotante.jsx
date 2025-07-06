@@ -1,8 +1,9 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import '../../Styles/ConfirmacionVotante.css';
 
 function ConfirmacionVotante({ onConfirm, onCancel }) {
+  const navigate = useNavigate();
   const location = useLocation();
   const user = location.state?.user;
 
@@ -20,7 +21,7 @@ function ConfirmacionVotante({ onConfirm, onCancel }) {
         <p><strong>¿Su voto fue realizado?</strong> { user.voto_realizado == 0 ? <p> no </p> : <p> sí </p>} </p>
       </div>
       <div className="confirmation-buttons">
-        <button className="cancel-button" onClick={onCancel}>Cancelar</button>
+        <button className="cancel-button" onClick={() => navigate('/busqueda-mesa')}>Cancelar</button>
         <button className="confirm-button" onClick={() => onConfirm(user)}>Sí</button>
       </div>
     </div>

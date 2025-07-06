@@ -10,11 +10,14 @@ function BusquedaMesa() {
   const [allVotantes, setAllVotantes] = useState([]);
   const [hasFetchedAll, setHasFetchedAll] = useState(false);
 
+  const [listaVotantes, setListaVotantes] = useState([]);
+
   // Trae las credenciales habilitadas para el circuito
   const fetchCredencialesCircuito = async () => {
     try {
       const data = await getCredencialesCircuito(1, 1); /* (id_ie, id_circuito) hardcodeadas */
       setVotantes(data);
+      setListaVotantes(data);
     } catch (error) {
       console.error("Error obteniendo votantes:", error);
     }
@@ -41,10 +44,21 @@ function BusquedaMesa() {
     }
   }, [query, hasFetchedAll]);   // Solo se hace el fetch de all-credenciales si se hace una búsqueda.
 
+  
+  // Define qué lista de votantes se muestra en pantalla
+  useEffect(() => {
+    if (query.trim() === '') {
+      // Si no hay búsqueda, muestra los votantes del circuito
+      setListaVotantes(votantes);
+    } else {
+      // Si hay búsqueda, muestra el filtrado de allVotantes
+      const filtrados = allVotantes.filter(user =>
+        `${user.serie_credencial}${user.numero_credencial}`.toLowerCase().includes(query.toLowerCase())
+      );
+      setListaVotantes(filtrados);
+    }
+  }, [query, votantes, allVotantes]);
 
-  const filtered = allVotantes?.filter(user =>
-    typeof query === 'string' && user.serie_credencial.toLowerCase().includes(query.toLowerCase())
-  );
 
   const handleToggle = (e, userId) => {
         e.stopPropagation(); 
@@ -76,7 +90,7 @@ function BusquedaMesa() {
 
       {/* Lista de usuarios */}
       <div className="lista-votantes">
-        {filtered?.map(user => (
+        {listaVotantes?.map(user => (
           <div key={user.id} className="votante">
             {/* Solo el nombre es clickeable */}
             <span
