@@ -1,28 +1,33 @@
-/* Estadisticas.css */
+/* src/Styles/Estadisticas.css */
+
 .estadisticas {
-  background-color: #D9D9D9;
+  background-color: #E8F2FF;
   padding: 20px;
   font-family: 'Arial', sans-serif;
-}
-
-.header {
-  background-color: #E8F2FF;
-  padding: 10px;
-  text-align: center;
+  min-height: 100vh;
 }
 
 .title {
   color: #07458B;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.estadisticas-container {
-  padding: 20px;
+.botonera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
 }
 
-button {
-  margin-right: 10px;
-  padding: 8px 12px;
+.input-circuito {
+  padding: 8px;
   font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #07458B;
+  width: 150px;
 }

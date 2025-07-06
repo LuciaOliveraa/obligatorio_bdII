@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Table from '../../Components/Table/Table';
+import VoteButton from '../../Components/VoteButton/VoteButton';
 import '../../Styles/Estadisticas.css';
 
 function Estadisticas() {
@@ -39,18 +40,18 @@ function Estadisticas() {
     <div className="estadisticas-container">
       <h1 className="title">{titulo}</h1>
 
-      <div className="header">
-        <button onClick={() => cargarDatos("pais")}>Resultados por País</button>
-        <button onClick={() => cargarDatos("pais-candidato")}>Resultados por Candidato</button>
+      <div className="botonera">
+        <VoteButton label= "Resultados por país" onClick={() => cargarDatos("pais")} />
+        <VoteButton label= "Resultados por candidato" onClick={() => cargarDatos("pais-candidato")} />
+        <VoteButton label= "Resultados por circuito" onClick={() => cargarDatos("circuito")} />
         <input
+          className= "input-circuito"
           type="number"
           min="1"
           value={circuito}
           onChange={(e) => setCircuito(e.target.value)}
           placeholder="N° Circuito"
-          style={{ margin: "0 10px", padding: "6px" }}
         />
-        <button onClick={() => cargarDatos("circuito")}>Resultados por Circuito</button>
       </div>
 
       <Table datos={datos} />
