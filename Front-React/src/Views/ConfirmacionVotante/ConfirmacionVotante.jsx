@@ -2,9 +2,14 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import '../../Styles/ConfirmacionVotante.css';
 import { updateVotoCredencial } from "../../Services/votacionServices";
-import { updateVotoObservado } from "../../Services/mesaServices";
+import { getCredencialesCircuito, updateVotoObservado } from "../../Services/mesaServices";
+import { useMesaAuth } from "../../Context/MesaAuthContext";
+import { useListaVotantes } from "../../Context/ListaVotantesContext";
 
-function ConfirmacionVotante({ onConfirm, onCancel }) {
+
+function ConfirmacionVotante() {
+  const { mesaAuth } = useMesaAuth();
+  const { setListaVotantes } = useListaVotantes();
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.state?.user;
@@ -18,8 +23,9 @@ function ConfirmacionVotante({ onConfirm, onCancel }) {
         await updateVotoCredencial(user.serie_credencial, user.numero_credencial, 1); /* (serie, numero, voto) */
         await sleep(2000);
 
-        console.log('esta habilitado: ', estaHabilitado);
-        console.log('user: ', user);
+        const listaActualizada = await getCredencialesCircuito(mesaAuth.idInstanciaElectiva, mesaAuth.idCircuito);
+        setListaVotantes(listaActualizada);
+        
         if (!estaHabilitado) {
           console.log('entre al if de observado!');
           // Si el votante no está habilidado en el circuito correspondiente, se marca en la credencial voto observado

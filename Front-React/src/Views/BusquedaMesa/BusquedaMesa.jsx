@@ -3,17 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import '../../Styles/BusquedaMesa.css';
 import './BusquedaMesa.css';
 import { getCredencialesCircuito, getAllCredenciales } from '../../Services/mesaServices';
-import { useMesaAuth } from '../../Context/MesaAuthContext'
+import { useMesaAuth } from '../../Context/MesaAuthContext';
+import { useListaVotantes } from '../../Context/ListaVotantesContext';
 
 function BusquedaMesa() {
   const { mesaAuth } = useMesaAuth();
+  const { listaVotantes, setListaVotantes } = useListaVotantes();
   const navigate = useNavigate();
+
   const [query, setQuery] = useState('');
   const [votantes, setVotantes] = useState([]);
   const [allVotantes, setAllVotantes] = useState([]);
   const [hasFetchedAll, setHasFetchedAll] = useState(false);
 
-  const [listaVotantes, setListaVotantes] = useState([]);
+  //const [listaVotantes, setListaVotantes] = useState([]);
 
   // Trae las credenciales habilitadas para el circuito
   const fetchCredencialesCircuito = async () => {
@@ -75,12 +78,21 @@ function BusquedaMesa() {
         )
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/loginmesa');
+  };
+
   return (
     <div className="busqueda-mesa">
       {/* Header */}
       <div className="header">
         <img src="/logo.png" alt="Logo" className="logo" />
         <h2 className="title">Ingrese credenciales del usuario a votar</h2>
+
+        <button className="logout-button" onClick={handleLogout}>
+          Cerrar sesión
+        </button>
       </div>
 
       {/* Buscador */}
