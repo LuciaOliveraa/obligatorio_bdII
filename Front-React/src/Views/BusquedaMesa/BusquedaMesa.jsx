@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../Styles/BusquedaMesa.css';
+import './BusquedaMesa.css';
 import { getCredencialesCircuito, getAllCredenciales } from '../../Services/mesaServices';
 
 function BusquedaMesa() {
@@ -17,6 +18,7 @@ function BusquedaMesa() {
     try {
       const data = await getCredencialesCircuito(1, 1); /* (id_ie, id_circuito) hardcodeadas */
       setVotantes(data);
+      console.log("DATA DESDE BACKEND not all:", data);
       setListaVotantes(data);
     } catch (error) {
       console.error("Error obteniendo votantes:", error);
@@ -27,6 +29,7 @@ function BusquedaMesa() {
   const fetchAllCredenciales = async () => {
     try {
       const data = await getAllCredenciales(1); /* (id_ie) hardcodeado */
+      console.log("DATA DESDE BACKEND:", data);
       setAllVotantes(data);
     } catch (error) {
       console.error("Error obteniendo votantes:", error);
@@ -42,9 +45,9 @@ function BusquedaMesa() {
       fetchAllCredenciales();
       setHasFetchedAll(true);
     }
-  }, [query, hasFetchedAll]);   // Solo se hace el fetch de all-credenciales si se hace una búsqueda.
+  }, [query]);   // Solo se hace el fetch de all-credenciales si se hace una búsqueda.
 
-  
+
   // Define qué lista de votantes se muestra en pantalla
   useEffect(() => {
     if (query.trim() === '') {
@@ -90,24 +93,43 @@ function BusquedaMesa() {
 
       {/* Lista de usuarios */}
       <div className="lista-votantes">
-        {listaVotantes?.map(user => (
-          <div key={user.id} className="votante">
+        {listaVotantes?.map(user => {
+            const estaHabilitado = votantes.some(v =>
+            v.serie_credencial === user.serie_credencial &&
+            v.numero_credencial === user.numero_credencial
+          );
+
+          return (
+          <div key={`${user.serie_credencial}-${user.numero_credencial}`} className="votante">
             {/* Solo el nombre es clickeable */}
             <span
               className="nombre clickable"
-              onClick={() => navigate('/confirmacionvotante', { state: { user } })}
+              onClick={() => navigate('/confirmacionvotante', { state: { user, estaHabilitado } })}
             >
               {user.serie_credencial} {user.numero_credencial}         {user.nombre} {user.apellido}
             </span>
 
-            <input
-              type="checkbox"
-              className="switch"
-              checked={user.isObserved}
-              onChange={(e) => handleToggle(e, user.id)}
-            />
+            <div className="botones-container">
+              {/* Botón de habilitación */}
+              <button className={estaHabilitado ? 'boton-habilitado' : 'boton-no-habilitado'}>
+                {estaHabilitado ? 'Habilitado' : 'No habilitado'}
+              </button>
+
+              {/* Botón de voto */}
+              <button className={user.voto_realizado === 1 ? 'boton-ya-voto' : 'boton-no-voto'} onClick={() => console.log(user)}>
+                {user.voto_realizado === 1 ? 'Ya votó' : 'No votó'}
+              </button>
+
+              <input
+                type="checkbox"
+                className="switch"
+                checked={user.observado}
+                onChange={(e) => handleToggle(e, user.id)}
+              />
+            </div>
+
           </div>
-        ))}
+        );})}
       </div>
 
       {/* Navbar. */}

@@ -136,6 +136,7 @@ def mesaRoutes(app):
             nuevo_estado = request.json["nuevo_estado"]
             cursor.execute("""UPDATE circuito SET id_estado = %s WHERE id = %s""",
                         (nuevo_estado, id_circuito,))
+            db.commit()
             
             cursor.execute("""SELECT descripcion FROM estado_circuito WHERE id = %s""", (nuevo_estado,))
             estado = cursor.fetchone()

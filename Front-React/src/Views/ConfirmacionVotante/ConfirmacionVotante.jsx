@@ -1,11 +1,28 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import '../../Styles/ConfirmacionVotante.css';
+import { updateVotoCredencial } from "../../Services/votacionServices";
 
 function ConfirmacionVotante({ onConfirm, onCancel }) {
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.state?.user;
+  const estaHabilitado = location.state?.user;
+
+  const updateVotanteVoto = async () => {
+      try {
+        await updateVotoCredencial(user.serie_credencial, user.numero_credencial, 1); /* (serie, numero, voto) */
+        if (!estaHabilitado) {
+          // llamar a put voto observado
+        }
+        navigate('/busqueda-mesa');
+      } catch (error) {
+        console.error("Error obteniendo votantes:", error);
+      }
+    };
+
+  // tambien hay que llamar service para cambio de estado de circuito
+
 
     if (!user) {
         return <div className="confirmation-container">Cargando datos del votante...</div>;
@@ -22,7 +39,7 @@ function ConfirmacionVotante({ onConfirm, onCancel }) {
       </div>
       <div className="confirmation-buttons">
         <button className="cancel-button" onClick={() => navigate('/busqueda-mesa')}>Cancelar</button>
-        <button className="confirm-button" onClick={() => onConfirm(user)}>Sí</button>
+        <button className="confirm-button" onClick={() => updateVotanteVoto()}>Sí</button>
       </div>
     </div>
   );
