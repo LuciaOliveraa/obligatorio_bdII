@@ -1,6 +1,8 @@
+const url = 'http://localhost:5001'
+
 export const loginTotem = async (usuario, contraseña) => {
   try {
-    const response = await fetch('http://localhost:5000/login-totem', {
+    const response = await fetch(`${url}/login-totem`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -25,7 +27,7 @@ export const loginTotem = async (usuario, contraseña) => {
 
 export const loginMesa = async (usuario, contraseña, idInstanciaElectiva) => {
   try {
-    const response = await fetch(`http://localhost:5000/login-miembro-mesa?ie=${idInstanciaElectiva}`, {
+    const response = await fetch(`${url}/login-miembro-mesa?ie=${idInstanciaElectiva}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

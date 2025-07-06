@@ -9,6 +9,7 @@ from estadisticas import estadisticasRoutes
 
 app = Flask(__name__)
 CORS(app)
+#CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 @app.route("/")
 def index():
@@ -31,5 +32,12 @@ votacionRoutes(app)
 mesaRoutes(app)
 estadisticasRoutes(app)
 
+#prueba
+@app.route('/test-cors', methods=['POST', 'OPTIONS'])
+def test_cors():
+    return {'ok': True}
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, port=5001)
+    

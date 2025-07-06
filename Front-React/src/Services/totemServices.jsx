@@ -1,6 +1,8 @@
+const url = 'http://localhost:5001'
+
 export const getVoteTypes = async() => {
     try{
-        const response = await fetch('http://localhost:5000/tipo-voto', { method: "GET"})
+        const response = await fetch(`${url}/tipo-voto`, { method: "GET"})
         const data = await response.json();
         return data;
 
@@ -11,7 +13,7 @@ export const getVoteTypes = async() => {
 
 export const getPartidos = async() => {
     try{
-        const response = await fetch('http://localhost:5000/partidos', { method: "GET"})
+        const response = await fetch(`${url}/partidos`, { method: "GET"})
         const data = await response.json();
         return data;
 
@@ -22,7 +24,7 @@ export const getPartidos = async() => {
 
 export const getListasPartido = async(id) => {
     try{
-        const response = await fetch(`http://localhost:5000/lista/${id}`, { method: "GET"})
+        const response = await fetch(`${url}/lista/${id}`, { method: "GET"})
         const data = await response.json();
         return data;
 

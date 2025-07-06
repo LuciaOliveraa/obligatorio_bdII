@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../Styles/BusquedaMesa.css';
+import { getCredencialesCircuito, getAllCredenciales } from '../../Services/mesaServices';
 
 function BusquedaMesa() {
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [votantes, setVotantes] = useState([
     { id: 1, nombre: 'Credencial2', isObserved: true },
@@ -11,10 +13,34 @@ function BusquedaMesa() {
     { id: 4, nombre: 'Menu Item', isObserved: true },
     { id: 5, nombre: 'Menu Item', isObserved: true }
   ]);
+  const [allVotantes, setAllVotantes] = useState([]);
 
-  const navigate = useNavigate();
+  // Trae las credenciales habilitadas para el circuito
+  const fetchCredencialesCircuito = async () => {
+    try {
+      const data = await getCredencialesCircuito(1, 1); /* (id_ie, id_circuito) hardcodeadas */
+      setVotantes(data);
+    } catch (error) {
+      console.error("Error obteniendo votantes:", error);
+    }
+  };
 
-  const filtered = votantes.filter(user =>
+  // Trae todas las credenciales de la eleccion
+  const fetchAllCredenciales = async () => {
+    try {
+      const data = await getAllCredenciales(1); /* (id_ie) hardcodeado */
+      setAllVotantes(data);
+    } catch (error) {
+      console.error("Error obteniendo votantes:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCredencialesCircuito();
+    //fetchAllCredenciales();
+  }, []);
+
+  const filtered = votantes?.filter(user =>
     typeof query === 'string' && user.nombre.toLowerCase().includes(query.toLowerCase())
   );
 
@@ -48,14 +74,14 @@ function BusquedaMesa() {
 
       {/* Lista de usuarios */}
       <div className="lista-votantes">
-        {filtered.map(user => (
+        {filtered?.map(user => (
           <div key={user.id} className="votante">
             {/* Solo el nombre es clickeable */}
             <span
               className="nombre clickable"
-              onClick={() => navigate('/confirmacionvotante')}
+              onClick={() => navigate('/confirmacionvotante', { state: { user } })}
             >
-              {user.nombre}
+              {user.serie_credencial} {user.numero_credencial}         {user.nombre} {user.apellido}
             </span>
 
             <input
