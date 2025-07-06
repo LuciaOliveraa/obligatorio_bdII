@@ -2,20 +2,32 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import '../../Styles/ConfirmacionVotante.css';
 import { updateVotoCredencial } from "../../Services/votacionServices";
+import { updateVotoObservado } from "../../Services/mesaServices";
 
 function ConfirmacionVotante({ onConfirm, onCancel }) {
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.state?.user;
-  const estaHabilitado = location.state?.user;
+  const estaHabilitado = location.state?.estaHabilitado;
 
-  const updateVotanteVoto = async () => {
+  // Función para que react espere antes de navegar a la siguiente página
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+  const habilitarVoto = async () => {
       try {
         await updateVotoCredencial(user.serie_credencial, user.numero_credencial, 1); /* (serie, numero, voto) */
+        await sleep(2000);
+        
+        console.log('esta habilitado: ', estaHabilitado);
+        console.log('user: ', user);
         if (!estaHabilitado) {
-          // llamar a put voto observado
+          console.log('entre al if de observado!');
+          // Si el votante no está habilidado en el circuito correspondiente, se marca en la credencial voto observado
+          await updateVotoObservado(user.serie_credencial, user.numero_credencial);
         }
+
         navigate('/busqueda-mesa');
+        
       } catch (error) {
         console.error("Error obteniendo votantes:", error);
       }
@@ -39,7 +51,7 @@ function ConfirmacionVotante({ onConfirm, onCancel }) {
       </div>
       <div className="confirmation-buttons">
         <button className="cancel-button" onClick={() => navigate('/busqueda-mesa')}>Cancelar</button>
-        <button className="confirm-button" onClick={() => updateVotanteVoto()}>Sí</button>
+        <button className="confirm-button" onClick={() => habilitarVoto()}>Sí</button>
       </div>
     </div>
   );
