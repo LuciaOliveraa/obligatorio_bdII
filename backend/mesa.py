@@ -32,6 +32,7 @@ def mesaRoutes(app):
     # Devuelve todas las credenciales de un circuito en una instancia electiva
     @app.route("/credenciales-circuito/<int:ie>/<int:id>", methods = ['GET'])
     def get_credenciales_circuito(ie, id):
+        cursor = None
         try:
             cursor = db.cursor(dictionary=True)
             cursor.execute("""SELECT serie_credencial, numero_credencial, voto_realizado, observado, ci.nombre, ci.apellido
@@ -55,12 +56,14 @@ def mesaRoutes(app):
         except Error as e:
             return jsonify({"Error: ": str(e)}), 500
         finally:
-            cursor.close()
+            if cursor:
+                cursor.close()
     
     
     # Devuelve una lista de todas las credenciales habilitadas para una instancia electiva en específico.
     @app.route("/credenciales/<int:ie>", methods = ['GET'])
     def get_all_credenciales(ie):
+        cursor = None
         try:
             cursor = db.cursor(dictionary=True)
             cursor.execute("""SELECT serie_credencial, numero_credencial, voto_realizado, observado, ci.nombre, ci.apellido
@@ -84,12 +87,14 @@ def mesaRoutes(app):
         except Error as e:
             return jsonify({"Error: ": str(e)}), 500
         finally:
-            cursor.close()
+            if cursor:
+                cursor.close()
 
 
     # Devuelve la información de un votante en base a su credencial.
     @app.route("/info-voto-credencial/<string:serie>/<int:num>", methods=['GET'])
     def get_info_voto_credencial(serie, num):
+        cursor = None
         try:
             cursor = db.cursor(dictionary=True)
             cursor.execute("""SELECT serie_credencial, numero_credencial, observado, voto_realizado, ci.nombre, ci.apellido
@@ -113,7 +118,8 @@ def mesaRoutes(app):
         except Error as e:
             return jsonify({"Error: ": str(e)}), 500
         finally:
-            cursor.close()
+            if cursor:
+                cursor.close()
 
 
     # Cambia el estado del circuito desde la tablet de la mesa.
@@ -142,7 +148,7 @@ def mesaRoutes(app):
         finally:
             cursor.close()  
 
-    # terminar
+
     @app.route("/voto-observado/<string:serie>/<int:numero>", methods=['PUT'])
     def put_voto_observado_credencial(serie, numero):
         try:

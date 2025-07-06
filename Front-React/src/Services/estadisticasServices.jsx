@@ -1,6 +1,8 @@
+const url = 'http://localhost:5001'
+
 export const getResultadosCircuito = async (idEleccion, idCircuito) => {
     try {
-        const response = await fetch(`http://localhost:5000/resultados-circuito/${idEleccion}/${idCircuito}`);
+        const response = await fetch(`${url}/resultados-circuito/${idEleccion}/${idCircuito}`);
         const data = await response.json();
         return data;
     } catch (error) {

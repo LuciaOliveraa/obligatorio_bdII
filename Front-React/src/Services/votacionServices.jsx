@@ -1,6 +1,8 @@
+const url = 'http://127.0.0.1:5001'
+
 export const updateVotoCredencial = async(serie, numero, voto) => {
     try {
-        const response = await fetch (`http://127.0.0.1:5000/voto-credencial/${serie}/${numero}?voto=${voto}`, {
+        const response = await fetch (`${url}/voto-credencial/${serie}/${numero}?voto=${voto}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
         }) 
@@ -27,7 +29,7 @@ export const postVoto = async (circuito, instancia_electiva, papeleta, id_tipo_v
         3 Anulado
     */
     try {
-        const response = await fetch (`http://127.0.0.1:5000/voto/${id_tipo_voto}`, {
+        const response = await fetch (`${url}/voto/${id_tipo_voto}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(voto_info)
