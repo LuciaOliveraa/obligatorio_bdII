@@ -40,6 +40,10 @@ const SelectLista = () => {
 
   const handleConfirmar = () => {
     setSelectedList(listaSeleccionada);
+    localStorage.setItem('listaId', listaSeleccionada.id);
+    localStorage.setItem('listaLema', listaSeleccionada.lema);
+    localStorage.setItem('partidoId', listaSeleccionada.id_partido_politico)
+    console.log(listaSeleccionada);
     navigate('/lista');
   };
 
