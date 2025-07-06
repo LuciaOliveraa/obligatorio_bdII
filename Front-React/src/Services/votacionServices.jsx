@@ -1,6 +1,8 @@
+const url = 'http://127.0.0.1:5001'
+
 export const updateVotoCredencial = async(serie, numero, voto) => {
     try {
-        const response = await fetch (`http://127.0.0.1:5000/voto-credencial/${serie}/${numero}?voto=${voto}`, {
+        const response = await fetch (`${url}/voto-credencial/${serie}/${numero}?voto=${voto}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
         }) 
@@ -11,14 +13,13 @@ export const updateVotoCredencial = async(serie, numero, voto) => {
     }
 }
 
-export const postVoto = async (circuito, instancia_electiva, observado, papeleta) => {
+export const postVoto = async (circuito, instancia_electiva, papeleta, id_tipo_voto) => {
     // Todos los datos a ingresar son de tipo int
 
     const voto_info = {
         id_circuito: circuito,
         id_instancia_electiva: instancia_electiva,
         fecha_hora: obtenerFechaHoraActual(),
-        observado: observado,       // 0 no observado, 1 observado
         papeleta: papeleta          // si voto es blanco o anulado, en papeleta poner null
     }
 
@@ -28,25 +29,17 @@ export const postVoto = async (circuito, instancia_electiva, observado, papeleta
         3 Anulado
     */
     try {
-        const response = await fetch (`http://127.0.0.1:5000/voto/${id_tipo_voto}`, {
+        const response = await fetch (`${url}/voto/${id_tipo_voto}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(voto_info)
         }) 
         const data = await response.json();
 
-        const enrollment = {
-            student_ci: student_ci,
-            lesson_id: lesson_id,
-            date: date
-        }
-
-        addEnrollment(enrollment);
-
-        console.log("post enrollment response: ", data);
+        console.log("post voto response: ", data);
         return data; 
     } catch (error) {
-        console.log('Error añadiendo inscripción', error)
+        console.log('Error en post voto', error)
     }
 }
 

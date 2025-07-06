@@ -3,8 +3,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginMesa } from "../../Services/loginServices";
 import '../../Styles/LoginMesa.css'; 
+import { useMesaAuth } from "../../Context/MesaAuthContext"
 
 function LoginMesa() {
+    const { updateMesaAuth } = useMesaAuth();
     const navigate = useNavigate();
 
     const [usuario, setUsuario] = useState('');
@@ -17,8 +19,8 @@ function LoginMesa() {
 
         const idInstanciaElectiva = 1; 
 
-        try{
-            const data = await loginMesa(usuario, contraseña, idInstanciaElectiva);
+        try {
+            const data = await loginMesa(usuario, contraseña, idInstanciaElectiva, updateMesaAuth);
             console.log("Login miembro de mesa:", data);
 
             navigate('/busqueda-mesa'); 

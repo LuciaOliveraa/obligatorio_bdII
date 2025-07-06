@@ -31,5 +31,11 @@ votacionRoutes(app)
 mesaRoutes(app)
 estadisticasRoutes(app)
 
+#prueba
+@app.route('/test-cors', methods=['POST', 'OPTIONS'])
+def test_cors():
+    return {'ok': True}
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, port=5001)

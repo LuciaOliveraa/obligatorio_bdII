@@ -3,6 +3,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { VoteProvider } from './Context/VoteContext';
 import { ROUTES } from './Constants/Routes';
+import { MesaAuthProvider } from './Context/MesaAuthContext';
+import { ListaVotantesProvider } from './Context/ListaVotantesContext';
 
 // Lazy loading para mejor performance
 const LoginTotem = React.lazy(() => import('./Views/LoginTotem/LoginTotem'));
@@ -27,7 +29,10 @@ const Loading = () => <div className="loading">Cargando...</div>;
 function App() {
   return (
     <Router>
+      <MesaAuthProvider>
+      <ListaVotantesProvider>
       <VoteProvider>
+        
         <React.Suspense fallback={<Loading />}>
           <div className="app-container">
             <Routes>
@@ -41,16 +46,21 @@ function App() {
               <Route path={ROUTES.CONFIRM_LISTA} element={<Lista />} />
               <Route path={ROUTES.CONFIRMED} element={<VoteConfirmed />} />
 
+
               <Route path={ROUTES.LOGINMESA} element={<LoginMesa />} />
               <Route path={ROUTES.BUSQUEDAMESA} element={<BusquedaMesa />} />
               <Route path={ROUTES.CONFIRMACIONVOTANTE} element={<ConfirmacionVotante />} />
               <Route path={ROUTES.VOTANTEHABILITADO} element={<VotanteHabilitado />} />
               <Route path={ROUTES.ESTADISTICAS} element={<Estadisticas />} />
               <Route path="*" element={<div>Página no encontrada</div>} />
+              
+              
             </Routes>
           </div>
         </React.Suspense>
       </VoteProvider>
+      </ListaVotantesProvider>
+      </MesaAuthProvider>
     </Router>
   );
 }

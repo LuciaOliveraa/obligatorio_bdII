@@ -1,18 +1,82 @@
-/* Estadisticas.css */
+/* Fondo general de la vista */
 .estadisticas {
-  background-color: #D9D9D9;
-  padding: 20px;
+  background-color: #E8F2FF;
+  min-height: 100vh;
+  padding: 40px 5%;
+  box-sizing: border-box;
   font-family: 'Arial', sans-serif;
 }
 
-.header {
-  background-color: #E8F2FF;
-  padding: 10px;
-  text-align: center;
+.titulo-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .title {
+  font-size: 36px;
   color: #07458B;
-  font-size: 24px;
-  font-weight: bold;
+  text-align: center;
+  margin: 0;
 }
+
+.subtitle {
+  font-size: 20px;
+  color: #07458B;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* Contenedor general de cada grupo (botones e input) */
+.botonera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+/* Botones a la izquierda */
+.boton-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+/* Inputs alineados a la derecha */
+.input-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Input de circuito */
+.input-circuito {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #999;
+  width: 180px;
+}
+
+/* Dropdown de departamento */
+.select-departamento {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #999;
+  width: 200px;
+  background-color: white;
+}
+
+/* Tabla con margen superior */
+.tabla-container {
+  margin-top: 30px;
+}
+
+

@@ -1,0 +1,67 @@
+.boton-habilitado {
+  background-color: #004a93;
+  color: white;
+  border: 2px solid #004a93;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+.boton-no-habilitado {
+  background-color: white;
+  color: #004a93;
+  border: 2px solid #004a93;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+.boton-ya-voto {
+  background-color: #004a93;
+  color: white;
+  border: 2px solid #004a93;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+.boton-no-voto {
+  background-color: white;
+  color: #004a93;
+  border: 2px solid #004a93;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+.votante {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.botones-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.logout-button {
+  margin-left: auto;
+  background-color: #0038a8; /* Azul bandera */
+  color: white;
+  border: 2px solid #ffd700; /* Borde dorado */
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #002d91; /* Azul más oscuro */
+}

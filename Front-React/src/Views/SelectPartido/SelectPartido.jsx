@@ -34,6 +34,7 @@ const SelectPartido = () => {
 
   const handleSiguiente = () => {
     setSelectedPartido(partidoSeleccionado);
+    localStorage.setItem('partidoNombre', partidoSeleccionado.nombre);
     navigate('/select-lista');
   };
 

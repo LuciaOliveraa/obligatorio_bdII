@@ -57,8 +57,10 @@ def votacionRoutes(app):
                             SET voto_realizado = %s
                             WHERE serie_credencial = %s AND numero_credencial = %s""", 
                             (voto, serie, num,))
+            db.commit()
+            voto_data = cursor.fetchall()
 
-            return jsonify({"message": f"Voto {voto} de credencial correctamente registrado"}), 201
+            return jsonify({"message": f"Voto {voto} {voto_data} de credencial correctamente registrado"}), 201
         except Error as e:
             return jsonify({"Error: ": str(e)}), 500
         finally:

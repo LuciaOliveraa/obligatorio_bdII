@@ -10,7 +10,8 @@ export const VoteProvider = ({ children }) => {
     type: null,
     partido: null,
     list: null,
-    timestamp: null
+    timestamp: null,
+    circuito: null,
   });
 
   const resetVote = useCallback(() => {
@@ -18,7 +19,8 @@ export const VoteProvider = ({ children }) => {
       type: null,
       partido: null,
       list: null,
-      timestamp: null
+      timestamp: null,
+      circuito: null
     });
   }, []);
 
@@ -34,6 +36,10 @@ export const VoteProvider = ({ children }) => {
     setVoteData(prev => ({ ...prev, list, timestamp: new Date().toISOString() }));
   }, []);
 
+  const setCircuito = useCallback((circuito) => {
+    setVoteData(prev => ({ ...prev, circuito }));
+  }, []);
+
   return (
     <VoteContext.Provider
       value={{
@@ -41,10 +47,12 @@ export const VoteProvider = ({ children }) => {
         selectedPartido: voteData.partido,
         selectedList: voteData.list,
         voteTimestamp: voteData.timestamp,
+        circuito: voteData.circuito,
         setVoteType,
         setSelectedPartido,
         setSelectedList,
-        resetVote
+        setCircuito,
+        resetVote,
       }}
     >
       {children}
