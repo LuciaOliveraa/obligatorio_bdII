@@ -3,6 +3,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../../Styles/Common.css';
 import '../../Styles/ConfirmAction.css';
+import { postVoto } from "../../Services/votacionServices";
 
 const Blanco = () => {
   const navigate = useNavigate();
@@ -11,7 +12,13 @@ const Blanco = () => {
     navigate('/select-vote-type'); 
   };
 
-  const handleAceptar = () => {
+  const handleAceptar = async () => {
+    try{
+      const circuito = localStorage.getItem('circuito');
+      await postVoto(circuito, 1, null, 2);
+    }catch (error){
+      console.error("Error en post voto", error);
+    }
     navigate('/vote-confirmed');
   };
 

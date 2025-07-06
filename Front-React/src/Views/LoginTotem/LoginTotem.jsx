@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginTotem } from "../../Services/loginServices";
-import '../../Styles/LoginTotem.css'; 
+import '../../Styles/LoginTotem.css';
 
 function LoginTotem() {
     const navigate = useNavigate();
@@ -17,8 +17,10 @@ function LoginTotem() {
 
         try{
             const data = await loginTotem(usuario, contraseña);
-            console.log("Login exitoso. ID Circuito:", data.id_circuito);
 
+            localStorage.setItem('circuito', data.id_circuito);
+
+            console.log("Login exitoso. ID Circuito:", data.id_circuito);
             navigate('/Welcome'); 
         } catch (error) {
             setError('Usuario o contraseña incorrectos. Intente nuevamente.');
