@@ -17,7 +17,7 @@ function ConfirmacionVotante({ onConfirm, onCancel }) {
       try {
         await updateVotoCredencial(user.serie_credencial, user.numero_credencial, 1); /* (serie, numero, voto) */
         await sleep(2000);
-        
+
         console.log('esta habilitado: ', estaHabilitado);
         console.log('user: ', user);
         if (!estaHabilitado) {

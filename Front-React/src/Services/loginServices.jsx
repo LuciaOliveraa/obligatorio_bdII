@@ -25,7 +25,7 @@ export const loginTotem = async (usuario, contraseña) => {
 
 
 
-export const loginMesa = async (usuario, contraseña, idInstanciaElectiva) => {
+export const loginMesa = async (usuario, contraseña, idInstanciaElectiva, setMesaAuth) => {
   try {
     const response = await fetch(`${url}/login-miembro-mesa?ie=${idInstanciaElectiva}`, {
       method: 'POST',
@@ -40,6 +40,13 @@ export const loginMesa = async (usuario, contraseña, idInstanciaElectiva) => {
     if (!response.ok) {
       throw new Error(data.error || 'Error al iniciar sesión');
     }
+
+    const mesa = {
+      idCircuito: data.id_circuito,
+      ciMiembroMesa: data.ci_miembro_mesa,
+      idInstanciaElectiva: 1
+    }
+    setMesaAuth(mesa);  // Set MesaAuthContext
 
     return data;
   } catch (error) {
