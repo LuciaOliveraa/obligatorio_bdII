@@ -9,7 +9,6 @@ from estadisticas import estadisticasRoutes
 
 app = Flask(__name__)
 CORS(app)
-#CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 @app.route("/")
 def index():
@@ -40,4 +39,3 @@ def test_cors():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
-    
