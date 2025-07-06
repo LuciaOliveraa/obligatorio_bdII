@@ -40,6 +40,7 @@ function BusquedaMesa() {
     fetchCredencialesCircuito();
   }, []);
 
+
   useEffect(() => {
     if (query.trim() !== '' && !hasFetchedAll) {
       fetchAllCredenciales();

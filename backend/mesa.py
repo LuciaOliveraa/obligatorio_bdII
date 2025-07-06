@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import jsonify, request, make_response
 from mysql.connector import Error
 from connection import get_db_connection
 
@@ -44,6 +44,7 @@ def mesaRoutes(app):
                             WHERE id_circuito = %s AND id_instancia_electiva = %s""", 
                             (id, ie,)) # ie es instancia electiva
             result = cursor.fetchall()
+            print("get_credenciales_circuito desde endpoint ", result)
 
             return jsonify(result), 200
             """ devuelve lista:
@@ -155,12 +156,11 @@ def mesaRoutes(app):
         try:
             cursor = db.cursor(dictionary=True)
 
-            voto = request.args.get('voto')
-
             cursor.execute("""UPDATE credencial_asignada_circuito_instancia_electiva
                             SET observado = 1
                             WHERE serie_credencial = %s AND numero_credencial = %s""", 
                             (serie, numero,))
+            db.commit()
 
             return jsonify({"message": f"Voto observado de credencial correctamente registrado"}), 201
         except Error as e:

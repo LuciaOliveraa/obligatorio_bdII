@@ -58,3 +58,18 @@ export const updateEstadoCircuito = async (id_circuito, nuevo_estado) => {
         console.log(`Error updateando el estado del circuito`, error);
     }
 };
+
+
+export const updateVotoObservado = async (serie, numero) => {
+    try {
+        const response = await fetch(`${url}/voto-observado/${serie}/${numero}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" }
+        });
+        const data = await response.json();
+        //console.log('entre al service updateVotoObservado ', data);
+        return data;
+    } catch (error) {
+        console.log(`Error updateando el voto observado de la credencial`, error);
+    }
+};
