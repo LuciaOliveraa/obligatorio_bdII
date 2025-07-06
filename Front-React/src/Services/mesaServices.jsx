@@ -6,6 +6,7 @@ export const getCredencialesCircuito = async (id_ie, id_circuito) => {
             method: "GET"
         });
         const data = await response.json();
+        console.log('credenciales desde service: ', data);
         return data;
     } catch (error) {
         console.log(`Error obteniendo credenciales del circuito ${id_circuito}`, error);
@@ -19,6 +20,7 @@ export const getAllCredenciales = async (id_ie) => {
             method: "GET"
         });
         const data = await response.json();
+        console.log('ALL credenciales desde service: ', data);
         return data;
     } catch (error) {
         console.log(`Error obteniendo todas las credenciales`, error);

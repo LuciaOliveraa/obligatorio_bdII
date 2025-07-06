@@ -57,10 +57,7 @@ def votacionRoutes(app):
                             SET voto_realizado = %s
                             WHERE serie_credencial = %s AND numero_credencial = %s""", 
                             (voto, serie, num,))
-            
-            cursor.execute("""SELECT voto_realizado FROM credencial_asignada_circuito_instancia_electiva
-                            WHERE serie_credencial = %s AND numero_credencial = %s""", 
-                            (serie, num,))
+            db.commit()
             voto_data = cursor.fetchall()
 
             return jsonify({"message": f"Voto {voto} {voto_data} de credencial correctamente registrado"}), 201
