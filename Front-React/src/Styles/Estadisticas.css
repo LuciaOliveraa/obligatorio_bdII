@@ -7,6 +7,20 @@
   min-height: 100vh;
 }
 
+.main-title {
+  font-size: 36px;
+  color: #07458B;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #07458B;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .title {
   color: #07458B;
   font-size: 28px;
@@ -30,4 +44,10 @@
   border-radius: 5px;
   border: 1px solid #07458B;
   width: 150px;
+}
+
+body {
+  background-color: #E8F2FF;
+  margin: 0;
+  padding: 0;
 }

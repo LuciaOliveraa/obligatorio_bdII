@@ -5,7 +5,7 @@ import '../../Styles/Estadisticas.css';
 
 function Estadisticas() {
   const [datos, setDatos] = useState([]);
-  const [titulo, setTitulo] = useState('Resultados País');
+  const [subtitulo, setSubtitulo] = useState('Resultados País');
   const [circuito, setCircuito] = useState(1);
 
   useEffect(() => {
@@ -14,38 +14,39 @@ function Estadisticas() {
 
   const cargarDatos = (tipo) => {
     let url = "";
-    let nuevoTitulo = "";
+    let nuevoSubtitulo = "";
 
     if (tipo === "pais") {
       url = "http://localhost:5001/resultados-pais/1";
-      nuevoTitulo = "Resultados País";
+      nuevoSubtitulo = "Resultados País";
     } else if (tipo === "pais-candidato") {
       url = "http://localhost:5001/resultados-pais-candidato/1";
-      nuevoTitulo = "Resultados País por Candidato";
+      nuevoSubtitulo = "Resultados País por Candidato";
     } else if (tipo === "circuito") {
       url = `http://localhost:5001/resultados-circuito/1/${circuito}`;
-      nuevoTitulo = `Resultados Circuito ${circuito}`;
+      nuevoSubtitulo = `Resultados Circuito ${circuito}`;
     }
 
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setTitulo(nuevoTitulo);
+        setSubtitulo(nuevoSubtitulo);
         setDatos(data);
       })
       .catch((err) => console.error("Error al cargar datos:", err));
   };
 
   return (
-    <div className="estadisticas-container">
-      <h1 className="title">{titulo}</h1>
+    <div className="estadisticas">
+      <h1 className="main-title">Estadísticas</h1>
+      <h2 className="subtitle">{subtitulo}</h2>
 
       <div className="botonera">
-        <VoteButton label= "Resultados por país" onClick={() => cargarDatos("pais")} />
-        <VoteButton label= "Resultados por candidato" onClick={() => cargarDatos("pais-candidato")} />
-        <VoteButton label= "Resultados por circuito" onClick={() => cargarDatos("circuito")} />
+        <VoteButton label="Resultados por País" onClick={() => cargarDatos("pais")} />
+        <VoteButton label="Resultados por Candidato" onClick={() => cargarDatos("pais-candidato")} />
+        <VoteButton label="Resultados por Circuito" onClick={() => cargarDatos("circuito")} />
         <input
-          className= "input-circuito"
+          className="input-circuito"
           type="number"
           min="1"
           value={circuito}

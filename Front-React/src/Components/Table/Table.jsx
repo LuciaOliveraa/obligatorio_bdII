@@ -1,4 +1,5 @@
 import React from "react";
+import './Table.css'; 
 
 const Table = ({ datos }) => {
   if (!datos || datos.length === 0) {
@@ -8,7 +9,7 @@ const Table = ({ datos }) => {
   const columnas = Object.keys(datos[0]);
 
   return (
-    <table border="1">
+    <table className="custom-table">
       <thead>
         <tr>
           {columnas.map((col) => (
