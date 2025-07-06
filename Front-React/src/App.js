@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { VoteProvider } from './Context/VoteContext';
 import { ROUTES } from './Constants/Routes';
 import { MesaAuthProvider } from './Context/MesaAuthContext';
+import { ListaVotantesProvider } from './Context/ListaVotantesContext';
 
 // Lazy loading para mejor performance
 const LoginTotem = React.lazy(() => import('./Views/LoginTotem/LoginTotem'));
@@ -29,7 +30,9 @@ function App() {
   return (
     <Router>
       <MesaAuthProvider>
+      <ListaVotantesProvider>
       <VoteProvider>
+        
         <React.Suspense fallback={<Loading />}>
           <div className="app-container">
             <Routes>
@@ -56,6 +59,7 @@ function App() {
           </div>
         </React.Suspense>
       </VoteProvider>
+      </ListaVotantesProvider>
       </MesaAuthProvider>
     </Router>
   );
