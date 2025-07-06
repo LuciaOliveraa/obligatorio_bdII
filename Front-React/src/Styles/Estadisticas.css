@@ -1,58 +1,82 @@
-/* src/Styles/Estadisticas.css */
-
+/* Fondo general de la vista */
 .estadisticas {
   background-color: #E8F2FF;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
   min-height: 100vh;
+  padding: 40px 5%;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
 }
 
-.main-title {
+.titulo-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
   font-size: 36px;
   color: #07458B;
   text-align: center;
-  margin-bottom: 5px;
+  margin: 0;
 }
 
 .subtitle {
   font-size: 20px;
   color: #07458B;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.title {
-  color: #07458B;
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  margin-top: 5px;
   text-align: center;
 }
 
+/* Contenedor general de cada grupo (botones e input) */
 .botonera {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  flex-wrap: nowrap;
   margin-bottom: 20px;
+  gap: 20px;
 }
 
-.botonera .vote-button {
-  flex-shrink: 0;
-  white-space: nowrap;
-  min-width: auto;
+/* Botones a la izquierda */
+.boton-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
 }
+
+/* Inputs alineados a la derecha */
+.input-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Input de circuito */
 .input-circuito {
-  padding: 8px;
+  padding: 8px 12px;
   font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #07458B;
-  width: 150px;
+  border-radius: 6px;
+  border: 1px solid #999;
+  width: 180px;
 }
 
-body {
-  background-color: #E8F2FF;
-  margin: 0;
-  padding: 0;
+/* Dropdown de departamento */
+.select-departamento {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #999;
+  width: 200px;
+  background-color: white;
 }
+
+/* Tabla con margen superior */
+.tabla-container {
+  margin-top: 30px;
+}
+
+
