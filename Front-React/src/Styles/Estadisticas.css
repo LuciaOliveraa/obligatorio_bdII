@@ -33,11 +33,16 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
-  justify-content: center;
 }
 
+.botonera .vote-button {
+  flex-shrink: 0;
+  white-space: nowrap;
+  min-width: auto;
+}
 .input-circuito {
   padding: 8px;
   font-size: 16px;
