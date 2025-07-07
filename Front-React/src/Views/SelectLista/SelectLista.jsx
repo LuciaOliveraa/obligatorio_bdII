@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useVote } from '../../Context/VoteContext';
 import '../../Styles/Common.css';
 import '../../Styles/SelectLista.css';
+import '../../Styles/VotanteHabilitado.css';
 import { getListasPartido } from "../../Services/totemServices";
 import { useEstadoCircuito } from '../../Context/EstadoCircuitoContext';
 

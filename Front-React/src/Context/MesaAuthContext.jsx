@@ -14,7 +14,8 @@ export const MesaAuthProvider = ({ children }) => {
     const initialState = {
         idCircuito: 0,
         ciMiembroMesa: "",
-        idInstanciaElectiva: 1
+        idInstanciaElectiva: 1,
+        amIloggedIn: 0
     }
 
     const [mesaAuth, setMesaAuth] = useState(() => {

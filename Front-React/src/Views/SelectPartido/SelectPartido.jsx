@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { useVote } from '../../Context/VoteContext';
 import '../../Styles/Common.css';
 import '../../Styles/SelectPartido.css';
+import '../../Styles/VotanteHabilitado.css';
 import { getPartidos } from "../../Services/totemServices";
 import { useEstadoCircuito } from '../../Context/EstadoCircuitoContext';
 
-const partidosDisponibles = ['Partido A', 'Partido B', 'Partido C'];
 
 const SelectPartido = () => {
   const { setSelectedPartido } = useVote();

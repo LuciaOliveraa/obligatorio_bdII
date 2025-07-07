@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import Table from '../../Components/Table/Table';
 import VoteButton from '../../Components/VoteButton/VoteButton';
 import '../../Styles/Estadisticas.css';
+import '../../Styles/VotanteHabilitado.css'; // para página alternativa
 import { useEffect } from 'react';
+import { useMesaAuth } from '../../Context/MesaAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Estadisticas() {
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize'));
   }, []);
+
+  const { mesaAuth } = useMesaAuth();
 
   const [datos, setDatos] = useState([]);
   const [titulo, setTitulo] = useState('Estadísticas');
@@ -69,6 +75,17 @@ function Estadisticas() {
       })
       .catch((err) => console.error('Error al cargar datos:', err));
   };
+
+
+  if (mesaAuth.amIloggedIn != 1) {
+    return (
+    <div className="votante-container">
+      <img src="/logo.png" alt="Escudo de Uruguay" />
+      <h1>Si no inicia sesión no puede visualizar las estadísticas</h1>
+      <button onClick={() => navigate('/loginmesa')}>Iniciar sesión</button>
+    </div>
+  );
+  }
 
   return (
     <div className="estadisticas">

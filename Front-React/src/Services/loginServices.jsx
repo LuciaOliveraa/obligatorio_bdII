@@ -44,7 +44,8 @@ export const loginMesa = async (usuario, contraseña, idInstanciaElectiva, setMe
     const mesa = {
       idCircuito: data.id_circuito,
       ciMiembroMesa: data.ci_miembro_mesa,
-      idInstanciaElectiva: 1
+      idInstanciaElectiva: 1,
+      amIloggedIn: 1
     }
     setMesaAuth(mesa);  // Set MesaAuthContext
 
