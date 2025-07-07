@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginMesa } from "../../Services/loginServices";
+import { getInstanciaElectiva, loginMesa } from "../../Services/loginServices";
 import '../../Styles/LoginMesa.css'; 
 import { useMesaAuth } from "../../Context/MesaAuthContext"
 
@@ -17,9 +17,12 @@ function LoginMesa() {
         e.preventDefault();
         setError('');
 
-        const idInstanciaElectiva = 1; 
+        //const idInstanciaElectiva = 1; 
 
         try {
+            const instanciaElectiva = await getInstanciaElectiva();
+            const idInstanciaElectiva = instanciaElectiva.instancia_electiva;
+            
             const data = await loginMesa(usuario, contraseña, idInstanciaElectiva, updateMesaAuth);
             console.log("Login miembro de mesa:", data);
 

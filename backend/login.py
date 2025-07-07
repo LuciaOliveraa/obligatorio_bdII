@@ -8,17 +8,17 @@ db = get_db_connection()
 
 def loginRoutes(app):
 
-    @app.route('/instancia-electiva/', methods=['GET'])
-    def get_ie():
+    @app.route('/instancia-electiva/<string:fecha_actual>', methods=['GET'])
+    def get_ie(fecha_actual):
         cursor = db.cursor(dictionary=True)
-        fecha_actual = request.json['fecha_actual'] # Debe recibir fecha en formato YYYY-MM-DD
-
+        # Debe recibir fecha en formato YYYY-MM-DD
+        
         try:
             cursor.execute("""SELECT ie.id as instancia_electiva, eie.id_eleccion
                             FROM instancia_electiva ie
                             JOIN eleccion_en_instancia_electiva eie
                              WHERE fecha = %s""", (fecha_actual,))
-            result = cursor.fetchall()
+            result = cursor.fetchone()
             
             return jsonify(result), 200
             """ devuelve lista:
