@@ -60,6 +60,20 @@ export const updateEstadoCircuito = async (id_circuito, nuevo_estado) => {
 };
 
 
+export const getEstadoCircuito = async (id_circuito) => {
+    try {
+        const response = await fetch(`${url}/get-estado-circuito/${id_circuito}`, {
+            method: "GET"
+        });
+        const data = await response.json();
+        
+        return data[0];
+    } catch (error) {
+        console.log(`Error obteniendo el estado del circuito`, error);
+    }
+}
+
+
 export const updateVotoObservado = async (serie, numero) => {
     try {
         const response = await fetch(`${url}/voto-observado/${serie}/${numero}`, {

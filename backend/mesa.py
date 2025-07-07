@@ -149,6 +149,22 @@ def mesaRoutes(app):
             return jsonify({"Error: ": str(e)}), 500
         finally:
             cursor.close()  
+    
+
+    @app.route("/get-estado-circuito/<int:id_circuito>", methods=["GET"])
+    def get_estado_circuito(id_circuito):
+        try:
+            cursor = db.cursor(id_circuito)
+
+            cursor.execute("SELECT id_estado FROM circuito WHERE id = %s", (id_circuito,))
+            estadoCircuito = cursor.fetchone()
+
+            return jsonify(estadoCircuito), 200
+        
+        except Error as e:
+            return jsonify({"Error: ": str(e)}), 500
+        finally:
+            cursor.close()
 
 
     @app.route("/voto-observado/<string:serie>/<int:numero>", methods=['PUT'])
