@@ -19,6 +19,7 @@ const Lista = React.lazy(() => import('./Views/Lista/Lista'));
 const VoteConfirmed = React.lazy(() => import('./Views/VoteConfirmed/VoteConfirmed'));
 
 const LoginMesa = React.lazy(() => import('./Views/LoginMesa/LoginMesa'));
+const InfoLoginCircuito = React.lazy(() => import('./Views/InfoLoginCircuito/InfoLoginCircuito'));
 const BusquedaMesa = React.lazy(() => import('./Views/BusquedaMesa/BusquedaMesa'));
 const ConfirmacionVotante = React.lazy(() => import('./Views/ConfirmacionVotante/ConfirmacionVotante'));
 const VotanteHabilitado = React.lazy(() => import('./Views/VotanteHabilitado/VotanteHabilitado'));
@@ -50,6 +51,7 @@ function App() {
 
 
               <Route path={ROUTES.LOGINMESA} element={<LoginMesa />} />
+              <Route path={ROUTES.INFO_LOGINCIRCUITO} element={<InfoLoginCircuito />} />
               <Route path={ROUTES.BUSQUEDAMESA} element={<BusquedaMesa />} />
               <Route path={ROUTES.CONFIRMACIONVOTANTE} element={<ConfirmacionVotante />} />
               <Route path={ROUTES.VOTANTEHABILITADO} element={<VotanteHabilitado />} />

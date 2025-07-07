@@ -12,6 +12,7 @@ export const ROUTES = {
   CONFIRMED: '/vote-confirmed',
 
   LOGINMESA: '/loginmesa',
+  INFO_LOGINCIRCUITO: '/info-login-circuito',
   BUSQUEDAMESA: '/busqueda-mesa',
   CONFIRMACIONVOTANTE: '/confirmacionvotante',
   VOTANTEHABILITADO: '/votantehabilitado',

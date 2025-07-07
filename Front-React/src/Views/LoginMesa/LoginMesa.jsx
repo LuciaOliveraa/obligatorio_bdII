@@ -23,7 +23,10 @@ function LoginMesa() {
             const data = await loginMesa(usuario, contraseña, idInstanciaElectiva, updateMesaAuth);
             console.log("Login miembro de mesa:", data);
 
-            navigate('/busqueda-mesa'); 
+            const usuarioCircuito = data.usuario_circuito;
+            const passCircuito = data.contraseña_circuito;
+
+            navigate('/info-login-circuito', {state: { usuarioCircuito, passCircuito }}); 
         } catch (err) {
             setError('Usuario o contraseña incorrectos. Intente nuevamente.');
         }
