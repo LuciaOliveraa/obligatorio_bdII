@@ -7,6 +7,7 @@ import VoteButton from '../../Components/VoteButton/VoteButton';
 import { ROUTES } from '../../Constants/Routes';
 import '../../Styles/Common.css';
 import '../../Styles/VoteConfirmed.css';
+import { updateEstadoCircuito } from '../../Services/mesaServices';
 
 const VoteConfirmed = () => {
   const { voteType, selectedPartido, selectedList, resetVote } = useVote();
@@ -24,8 +25,14 @@ const VoteConfirmed = () => {
     return <p><strong>Tipo de voto:</strong> {voteType}</p>;
   };
 
-  const handleReturn = () => {
+  // Función para que react espere antes de navegar a la siguiente página
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+  const handleReturn = async () => {
     resetVote();
+    // Cambia estado del totem circuito a Esperando.
+    await updateEstadoCircuito(localStorage.getItem("circuito"), 2);
+    sleep(1000);
     navigate(ROUTES.WELCOME);
   };
 

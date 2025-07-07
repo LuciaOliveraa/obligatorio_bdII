@@ -44,6 +44,7 @@ const SelectLista = () => {
     localStorage.setItem('listaLema', listaSeleccionada.lema);
     localStorage.setItem('partidoId', listaSeleccionada.id_partido_politico)
     console.log(listaSeleccionada);
+
     navigate('/lista');
   };
 

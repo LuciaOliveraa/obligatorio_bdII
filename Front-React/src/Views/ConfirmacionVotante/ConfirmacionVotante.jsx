@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import '../../Styles/ConfirmacionVotante.css';
 import { updateVotoCredencial } from "../../Services/votacionServices";
-import { getCredencialesCircuito, updateVotoObservado } from "../../Services/mesaServices";
+import { getCredencialesCircuito, updateEstadoCircuito, updateVotoObservado } from "../../Services/mesaServices";
 import { useMesaAuth } from "../../Context/MesaAuthContext";
 import { useListaVotantes } from "../../Context/ListaVotantesContext";
 
@@ -23,8 +23,11 @@ function ConfirmacionVotante() {
         await updateVotoCredencial(user.serie_credencial, user.numero_credencial, 1); /* (serie, numero, voto) */
         await sleep(2000);
 
-        const listaActualizada = await getCredencialesCircuito(mesaAuth.idInstanciaElectiva, mesaAuth.idCircuito);
-        setListaVotantes(listaActualizada);
+        //const listaActualizada = await getCredencialesCircuito(mesaAuth.idInstanciaElectiva, mesaAuth.idCircuito);
+        //setListaVotantes(listaActualizada);
+        
+        // Cambia estado del totem a Votando.
+        await updateEstadoCircuito(mesaAuth.idCircuito, 1);
         
         if (!estaHabilitado) {
           console.log('entre al if de observado!');
@@ -32,15 +35,12 @@ function ConfirmacionVotante() {
           await updateVotoObservado(user.serie_credencial, user.numero_credencial);
         }
 
-        navigate('/busqueda-mesa');
+        navigate('/votantehabilitado');
         
       } catch (error) {
         console.error("Error obteniendo votantes:", error);
       }
     };
-
-  // tambien hay que llamar service para cambio de estado de circuito
-
 
     if (!user) {
         return <div className="confirmation-container">Cargando datos del votante...</div>;
