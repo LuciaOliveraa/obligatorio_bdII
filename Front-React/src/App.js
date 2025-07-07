@@ -5,6 +5,7 @@ import { VoteProvider } from './Context/VoteContext';
 import { ROUTES } from './Constants/Routes';
 import { MesaAuthProvider } from './Context/MesaAuthContext';
 import { ListaVotantesProvider } from './Context/ListaVotantesContext';
+import { EstadoCircuitoProvider } from './Context/EstadoCircuitoContext';
 
 // Lazy loading para mejor performance
 const LoginTotem = React.lazy(() => import('./Views/LoginTotem/LoginTotem'));
@@ -30,6 +31,7 @@ function App() {
   return (
     <Router>
       <MesaAuthProvider>
+      <EstadoCircuitoProvider>
       <ListaVotantesProvider>
       <VoteProvider>
         
@@ -60,6 +62,7 @@ function App() {
         </React.Suspense>
       </VoteProvider>
       </ListaVotantesProvider>
+      </EstadoCircuitoProvider>
       </MesaAuthProvider>
     </Router>
   );

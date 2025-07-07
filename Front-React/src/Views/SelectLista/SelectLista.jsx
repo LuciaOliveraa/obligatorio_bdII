@@ -6,9 +6,11 @@ import { useVote } from '../../Context/VoteContext';
 import '../../Styles/Common.css';
 import '../../Styles/SelectLista.css';
 import { getListasPartido } from "../../Services/totemServices";
+import { useEstadoCircuito } from '../../Context/EstadoCircuitoContext';
 
 const SelectLista = () => {
   const { selectedPartido, setSelectedList } = useVote();
+  const { estadoCircuito } = useEstadoCircuito();
   const [listaSeleccionada, setListaSeleccionada] = useState(null);
   const [listas, setListas] = useState([]);
   const navigate = useNavigate();
@@ -51,6 +53,17 @@ const SelectLista = () => {
   const handleCancelar = () => {
     navigate('/select-partido');
   };
+
+
+  if (estadoCircuito != 1) {
+    return (
+    <div className="votante-container">
+      <img src="/logo.png" alt="Escudo de Uruguay" />
+      <h1>Espere a ser habilitado para realizar su voto</h1>
+      <button onClick={() => navigate('/welcome')}>Volver</button>
+    </div>
+  );
+  }
 
   return (
     <div className="lista-container">

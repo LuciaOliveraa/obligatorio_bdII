@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import '../../Styles/Common.css'
 import '../../Styles/ConfirmAction.css';
 import { postVoto } from "../../Services/votacionServices";
+import { useEstadoCircuito } from '../../Context/EstadoCircuitoContext';
 
 const Anulado = () => {
   const navigate = useNavigate();
+  const { estadoCircuito } = useEstadoCircuito();
 
   const handleCancelar = () => {
     navigate('/select-vote-type');
@@ -21,6 +23,17 @@ const Anulado = () => {
     }
     navigate('/vote-confirmed');
   };
+
+
+  if (estadoCircuito != 1) {
+    return (
+    <div className="votante-container">
+      <img src="/logo.png" alt="Escudo de Uruguay" />
+      <h1>Espere a ser habilitado para realizar su voto</h1>
+      <button onClick={() => navigate('/welcome')}>Volver</button>
+    </div>
+    );
+  }
 
   return (
     <div className="confirmar-container">

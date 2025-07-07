@@ -8,9 +8,11 @@ import { ROUTES } from '../../Constants/Routes';
 import '../../Styles/Common.css';
 import '../../Styles/VoteConfirmed.css';
 import { updateEstadoCircuito } from '../../Services/mesaServices';
+import { useEstadoCircuito } from '../../Context/EstadoCircuitoContext';
 
 const VoteConfirmed = () => {
   const { voteType, selectedPartido, selectedList, resetVote } = useVote();
+  const { updateEstadoCircuitoContext } = useEstadoCircuito();
   const navigate = useNavigate();
 
   const getVoteDetails = () => {
@@ -32,6 +34,8 @@ const VoteConfirmed = () => {
     resetVote();
     // Cambia estado del totem circuito a Esperando.
     await updateEstadoCircuito(localStorage.getItem("circuito"), 2);
+    updateEstadoCircuitoContext(2);
+    
     sleep(1000);
     navigate(ROUTES.WELCOME);
   };

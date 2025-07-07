@@ -5,10 +5,12 @@ import { updateVotoCredencial } from "../../Services/votacionServices";
 import { getCredencialesCircuito, updateEstadoCircuito, updateVotoObservado } from "../../Services/mesaServices";
 import { useMesaAuth } from "../../Context/MesaAuthContext";
 import { useListaVotantes } from "../../Context/ListaVotantesContext";
+import { useEstadoCircuito } from "../../Context/EstadoCircuitoContext";
 
 
 function ConfirmacionVotante() {
   const { mesaAuth } = useMesaAuth();
+  const { updateEstadoCircuitoContext } = useEstadoCircuito();
   const { setListaVotantes } = useListaVotantes();
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,6 +30,7 @@ function ConfirmacionVotante() {
         
         // Cambia estado del totem a Votando.
         await updateEstadoCircuito(mesaAuth.idCircuito, 1);
+        updateEstadoCircuitoContext(1);
         
         if (!estaHabilitado) {
           console.log('entre al if de observado!');

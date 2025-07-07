@@ -6,11 +6,13 @@ import { useVote } from '../../Context/VoteContext';
 import '../../Styles/Common.css';
 import '../../Styles/SelectPartido.css';
 import { getPartidos } from "../../Services/totemServices";
+import { useEstadoCircuito } from '../../Context/EstadoCircuitoContext';
 
 const partidosDisponibles = ['Partido A', 'Partido B', 'Partido C'];
 
 const SelectPartido = () => {
   const { setSelectedPartido } = useVote();
+  const { estadoCircuito } = useEstadoCircuito();
   const [partidoSeleccionado, setPartidoSeleccionado] = useState(null);
   const navigate = useNavigate();
   const [partidos, setPartidos] = useState([]);
@@ -41,6 +43,17 @@ const SelectPartido = () => {
   const handleCancelar = () => {
     navigate('/select-vote-type');
   };
+
+
+  if (estadoCircuito != 1) {
+    return (
+    <div className="votante-container">
+      <img src="/logo.png" alt="Escudo de Uruguay" />
+      <h1>Espere a ser habilitado para realizar su voto</h1>
+      <button onClick={() => navigate('/welcome')}>Volver</button>
+    </div>
+    );
+  }
 
   return (
     <div className="partido-container">

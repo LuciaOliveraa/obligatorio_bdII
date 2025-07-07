@@ -8,10 +8,13 @@ import VoteButton from '../../Components/VoteButton/VoteButton';
 import { ROUTES } from '../../Constants/Routes';
 import '../../Styles/Common.css';
 import '../../Styles/SelectVoteType.css';
+import '../../Styles/VotanteHabilitado.css';
 import { getVoteTypes } from "../../Services/totemServices";
+import { useEstadoCircuito } from '../../Context/EstadoCircuitoContext';
 
 const SelectVoteType = () => {
   const { setVoteType, resetVote } = useVote();
+  const { updateEstadoCircuitoContext, estadoCircuito } = useEstadoCircuito();
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
   const [voteTypes, setVoteTypes] = useState([]);
@@ -46,6 +49,17 @@ const SelectVoteType = () => {
     };
     navigate(routeMap[selected]);
   };
+
+
+  if (estadoCircuito != 1) {
+    return (
+    <div className="votante-container">
+      <img src="/logo.png" alt="Escudo de Uruguay" />
+      <h1>Espere a ser habilitado para realizar su voto</h1>
+      <button onClick={() => navigate('/welcome')}>Volver</button>
+    </div>
+  );
+  }
 
   return (
     <div className="seleccion-container">
